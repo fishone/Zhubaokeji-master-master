@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_100">
+    <com.zhubaokeji.library.TitleBar
+        android:id="@+id/rapnetResult_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:id="@+id/rap_result_parameter"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text=""/>
+
+    <com.zhubaokeji.android.vhtableview.VHTableView
+        android:id="@+id/vht_rap_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+    </com.zhubaokeji.android.vhtableview.VHTableView>
+</LinearLayout>

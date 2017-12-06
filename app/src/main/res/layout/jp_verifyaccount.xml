@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.zhubaokeji.library.TitleBar
+        android:id="@+id/jp_Verifyaccount_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/dp_10">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:padding="8dp"
+            android:text="账号" />
+
+        <com.zhubaokeji.android.utils.XEditText
+            android:id="@+id/userName"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:hint="账号/手机号"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_bg_edit"
+            android:textCursorDrawable="@drawable/bg_input_cursor"
+            android:inputType="text"
+            android:padding="8dp"
+            />
+
+        <TextView
+            android:id="@+id/verify"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp_40"
+            android:background="@color/blue_350"
+            android:text="下一步"/>
+    </LinearLayout>
+</LinearLayout>

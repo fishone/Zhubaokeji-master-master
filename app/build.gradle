@@ -1,0 +1,169 @@
+apply plugin: 'com.android.application'
+apply plugin: 'bugly' //添加Bugly符号表插件
+apply plugin: 'com.jakewharton.butterknife'
+bugly {
+    appId = "e7b505a967" //注册时分配的App ID
+    appKey = "b9060fb2-f72a-41a3-93c2-38bc1d31f6d3" //注册时分配的App Key
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.zhubaokeji.android"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        ndk {
+//            // 设置支持的SO库架构
+//            abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+//        }
+
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'zhubaokeji'
+            keyPassword '310520'
+            storeFile file('./keystore/zhubaokeji.jks')
+            storePassword '310520'
+        }
+    }
+    // 编译选项
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+    // recommend
+    dexOptions {
+        jumboMode = true
+    }
+    dataBinding {
+        enabled = true
+    }
+    allprojects {
+        repositories {
+            mavenCentral()
+            maven { url 'https://jitpack.io' }
+            maven { url "https://maven.google.com" }
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.config
+            //            // 自定义输出配置
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // 输出apk名称为zhubao_v1.0_wandoujia.apk
+//                        def fileName = "zhubao_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+        }
+    }
+//    productFlavors {
+//        kuan {}
+//        xiaomi {}
+//        qh360 {}
+//        baidu {}
+//        wandoujia {}
+//    }
+//
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+    }
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+    repositories {
+        flatDir {
+            dirs 'libs' //this way we can find the .aar file in libs folder
+        }
+    }
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "com.android.support:appcompat-v7:$supportLibVersion"
+    compile "com.android.support:support-v4:$supportLibVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibVersion"
+    compile "com.android.support:design:$supportLibVersion"
+    compile "com.android.support:cardview-v7:$supportLibVersion"
+    compile "com.android.support:percent:$supportLibVersion"
+    compile project(':library')
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.3' //Android底部导航栏
+    compile files('libs/universal-image-loader-1.9.5.jar')
+    compile(name: 'photoview-release-1.2.4', ext: 'aar')
+    compile(name: 'AndroidUtils', ext: 'aar')
+    testCompile 'junit:junit:4.12'
+    compile 'com.umeng.analytics:analytics:latest.integration'   //友盟
+    //序列化Java对象为JSON字符串，或反序列化JSON字符串成Java对象
+    compile 'com.google.code.gson:gson:2.8.0'
+    //ButterKnife是一个专注于Android系统的View注入框架,可以减少大量的findViewById以及setOnClickListener代码，可视化一键生成。
+    compile 'com.jakewharton:butterknife:8.4.0'
+    //ButterKnife是一个专注于Android系统的View注入框架,可以减少大量的findViewById以及setOnClickListener代码，可视化一键生成。
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    //仿iOS的PickerView控件，有时间选择和选项选择，并支持一二三级联动，支持自定义样式
+    compile 'com.contrarywind:Android-PickerView:3.0.5'
+    //Android广告图片轮播控件，支持无限循环和多种主题，可以灵活设置轮播样式、动画、轮播和切换时间、位置、图片加载框架等！
+    compile 'cn.bingoogolapple:bga-banner:2.1.7@aar'
+
+    //注释掉原有bugly的仓库
+    compile "com.android.support:multidex:1.0.1" // 多dex配置
+    //compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.3.2
+    compile 'com.tencent.bugly:crashreport_upgrade:1.3.1'
+    compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+
+    compile 'com.github.bumptech.glide:glide:3.7.0' //glide图片显示
+    compile 'com.lzy.net:okgo:3.0.2' //okgo 网络请求框架
+    compile 'com.lcodecorex:tkrefreshlayout:1.0.7' //支持下拉刷新和上拉加载的RefreshLayout
+    compile 'com.orhanobut:logger:2.1.1' //简单，漂亮和强大的记录器为Android
+    compile 'com.github.andremion:counterfab:1.0.1' //FloatingActionButton 第三方
+    compile 'com.yanzhenjie:recyclerview-swipe:1.0.4' //多功能的RecyclerView
+    compile 'com.readystatesoftware.chuck:library:1.0.4'
+    compile 'com.kelin.scrollablepanel:library:1.2.0' //二维RecyclerView
+ //   compile 'com.google.guava:guava:22.0-android' //包含很多Java工具类集的库
+    compile 'com.blankj:utilcode:1.8.1' //Java工具类集的库
+
+}
+bugly {
+    debug = false
+}
+// 依赖插件脚本
+apply from: 'tinker-support.gradle'
+

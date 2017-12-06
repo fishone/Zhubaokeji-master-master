@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+    <com.zhubaokeji.library.TitleBar
+        android:id="@+id/zhubao_home_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+        <cn.bingoogolapple.bgabanner.BGABanner
+            android:id="@+id/zhubao_zoomCenter"
+            style="@style/BannerDefaultStyle"
+            android:scaleType="centerInside"
+        app:banner_transitionEffect="fade"/>
+ </LinearLayout>
+    <com.zhubaokeji.android.utils.GridLayout
+        android:id="@+id/zhubao_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical"
+        app:itemMargin="0"
+        app:numColumns="3" >
+    </com.zhubaokeji.android.utils.GridLayout>
+</LinearLayout>

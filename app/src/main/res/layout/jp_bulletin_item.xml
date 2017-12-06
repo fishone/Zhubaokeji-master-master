@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:id="@+id/jp_bulletin_title"
+    android:layout_margin="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="1dp">
+            <TextView
+                android:id="@+id/jp_bulletin_Chtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="2dp"
+                android:textSize="13sp"
+                android:textColor="@color/grey_900"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/jp_bulletin_Lasttime"
+                android:layout_width="100dp"
+                android:text=""
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/grey_500"
+                android:gravity="center|right"
+                android:layout_height="wrap_content"
+               />
+        </LinearLayout>
+    <TextView
+        android:id="@+id/jp_bulletin_Entitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textColor="@color/grey_500"
+        android:layout_margin="1dp"
+        android:textSize="@dimen/sp_12"
+        android:text=""/>
+</LinearLayout>

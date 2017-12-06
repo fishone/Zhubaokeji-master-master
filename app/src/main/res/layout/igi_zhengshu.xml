@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="igi" type="com.zhubaokeji.android.bean.IgiCertificateResponse"/>
+        <import type="android.view.View" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_border"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/re_info"
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="150dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/zhengshutext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/IgiDiamondReport"/>
+                <ImageView
+                    android:id="@+id/igi_reportpic"
+                    android:layout_below="@id/zhengshutext"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/animatior_list"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="47dp"
+                    android:visibility="gone"
+                    android:id="@+id/igi_loading_report" />
+                <ImageView
+                    android:id="@+id/igi_loading_plot"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    android:background="@drawable/animatior_list"
+                    android:layout_alignTop="@+id/igi_loading_report"
+                    android:layout_alignEnd="@+id/igi_plotPic"
+                    android:layout_marginEnd="42dp" />
+                <ImageView
+                    android:id="@+id/igi_plotPic"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_below="@+id/zhengshutext"
+                    android:layout_toEndOf="@+id/igi_reportpic"
+                    android:layout_marginStart="14dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_reportnumber"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_reportnumber"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/rapoetNo"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_reportnumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_reportnumber"
+                    android:text="@{igi.reportnumber}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_reportcitydate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_reportcitydate"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/reportCityDate"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_reportcitydate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_reportcitydate"
+                    android:text="@{igi.reportcitydate}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_description"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_description"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="描述"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_description"
+                    android:text="@{igi.description}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_shapeandcut"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_shapeandcut"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/shape"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_shapeandcut"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_shapeandcut"
+                    android:text="@{igi.shapeandcut}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_caratweight"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_caratweight"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/caratWeight"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_caratweight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_caratweight"
+                    android:text="@{igi.caratweight}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_colorgrade"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_colorgrade"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/color"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_colorgrade"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_colorgrade"
+                    android:singleLine="true"
+                    android:text="@{igi.colorgrade}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_claritygrade"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_claritygrade"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/polish"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_claritygrade"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_claritygrade"
+                    android:singleLine="true"
+                    android:text="@{igi.claritygrade}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_cutgrade"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="@{igi.cutgrade != null ? View.VISIBLE : View.GONE}"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_cutgrade"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/cut"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_cutgrade"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_cutgrade"
+                    android:text="@{igi.claritygrade}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_polishsymmetry"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="@{igi.polishsymmetry != null ? View.VISIBLE : View.GONE}"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_polishsymmetry"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="POLISH-SYMMETRY"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_polishsymmetry"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_polishsymmetry"
+                    android:text="@{igi.polishsymmetry}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_proportions"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="@{igi.proportions != null ? View.VISIBLE : View.GONE}"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_proportions"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/proportion"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_proportions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_proportions"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@{igi.proportions}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_polish"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="@{igi.polish != null ? View.VISIBLE : View.GONE}"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_polish"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/polish"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_polish"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_polish"
+                    android:text="@{igi.polish}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_symmetry"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="@{igi.symmetry != null ? View.VISIBLE : View.GONE}"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_symmetry"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/symmetry"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_symmetry"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_symmetry"
+                    android:singleLine="true"
+                    android:text="@{igi.symmetry}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_measurements"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_measurements"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/measurements"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_measurements"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_measurements"
+                    android:text="@{igi.measurements}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+            android:id="@+id/re_tablesize"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_tablesize"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Table Size"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_tablesize"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|left"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_tablesize"
+                android:text="@{igi.tablesize}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_crownheightA"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_crownheightA"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/crownHeight"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_crownheightA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_crownheightA"
+                    android:text="@{igi.crownheightA}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_paviliondepthA"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_paviliondepthA"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/pavilionDepth"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_paviliondepthA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_paviliondepthA"
+                    android:gravity="center|left"
+                    android:text="@{igi.paviliondepthA}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_girdlethickness"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_girdlethickness"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/girdleThickness"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_girdlethickness"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_girdlethickness"
+                    android:gravity="center|left"
+                    android:text="@{igi.girdlethickness}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_culet"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_culet"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/culet"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_culet"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_culet"
+                    android:gravity="center|left"
+                    android:text="@{igi.culet}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_tobaldepth"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_tobaldepth"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/depth"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_tobaldepth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_tobaldepth"
+                    android:gravity="center|left"
+                    android:singleLine="true"
+                    android:text="@{igi.tobaldepth}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_fluorescence"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_fluorescence"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/fluore"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_fluorescence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_fluorescence"
+                    android:gravity="center|left"
+                    android:text="@{igi.fluorescence}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/re_laserscribe"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="@{igi.laserscribe != null ? View.VISIBLE : View.GONE}"
+                android:background="@drawable/btn_list_item_bg"
+                android:clickable="true" >
+                <TextView
+                    android:id="@+id/tv_temp_laserscribe"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="LASERSCRIBE"
+                    android:textColor="#353535"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tv_laserscribe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@id/tv_temp_laserscribe"
+                    android:gravity="center|left"
+                    android:text="@{igi.laserscribe}"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#dadada" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="gia" type="com.zhubaokeji.android.bean.GiaCertificateResponse"/>
+        <import type="android.view.View" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_300">
+        <RelativeLayout
+            android:id="@+id/re_info"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_info_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="@string/basicInf"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_reportNo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_reportNo"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="@string/rapoetNo"
+                android:gravity="center"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_reportNo"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_reportNo"
+                android:gravity="center|left"
+                android:text="@{gia.reportno}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_inscription"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:visibility="@{gia.inscription ==null ? View.GONE : View.VISIBLE}"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_inscription"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/inscription"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_inscription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_toRightOf="@id/tv_temp_inscription"
+                android:gravity="center|left"
+                android:text="@{gia.inscription}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_reportdate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_reportdate"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/date"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_reportdate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_toRightOf="@id/tv_temp_reportdate"
+                android:gravity="center|left"
+                android:text="@{gia.reportdate}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingLeft="20dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:layout_height="150dp">
+            <TextView
+                android:id="@+id/zhengshutext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GIA钻石分级证书"/>
+            <ImageView
+                android:id="@+id/reportpic"
+                android:layout_below="@id/zhengshutext"
+                android:background="@drawable/button_cheek"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:padding="2dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/animatior_list"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="47dp"
+                android:visibility="gone"
+                android:id="@+id/loading_report" />
+            <ImageView
+                android:id="@+id/plotPic"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="2dp"
+                android:background="@drawable/button_cheek"
+                android:layout_below="@+id/zhengshutext"
+                android:layout_toEndOf="@+id/reportpic"
+                android:layout_marginStart="14dp" />
+            <ImageView
+                android:id="@+id/loading_plot"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                android:background="@drawable/animatior_list"
+                android:layout_alignTop="@+id/loading_report"
+                android:layout_alignEnd="@+id/plotPic"
+                android:layout_marginEnd="40dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_shape"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:text="@{gia.shape}"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_measurements"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:visibility="@{gia.measurements ==null ? View.GONE : View.VISIBLE}"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_measurements"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/measurements"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_measurements"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_measurements"
+                android:gravity="center|left"
+                android:text="@{gia.measurements}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_caratweight"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.caratweight ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_caratweight"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/caratWeight"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_caratweight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_caratweight"
+                android:gravity="center|left"
+                android:text="@{gia.caratweight}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_origin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="@{gia.origin ==null ?View.GONE : View.VISIBLE}"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_origin"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/origin"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_origin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_origin"
+                android:gravity="center|left"
+                android:text="@{gia.origin}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_grade"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="@{gia.grade ==null ? View.GONE : View.VISIBLE}"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_grade"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/grade"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_grade"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_grade"
+                android:gravity="center|left"
+                android:text="@{gia.grade}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_distribution"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:visibility="@{gia.distribution ==null ? View.GONE : View.VISIBLE}"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true" >
+            <TextView
+                android:id="@+id/tv_temp_distribution"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/distribution"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_distribution"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_distribution"
+                android:gravity="center|left"
+                android:text="@{gia.distribution}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_colorgrade"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.colorgrade  ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_colorgrade"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/color"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_colorgrade"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_colorgrade"
+                android:gravity="center|left"
+                android:text="@{gia.colorgrade}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_claritygrade"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.claritygrade  ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_claritygrade"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/clarity"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_claritygrade"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_claritygrade"
+                android:gravity="center|left"
+                android:text="@{gia.claritygrade}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_cutgrade"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.cutgrade ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_cutgrade"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/cut"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_cutgrade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_cutgrade"
+                android:gravity="center|left"
+                android:text="@{gia.cutgrade}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_scale"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/grey_100"
+            android:clickable="true"
+            android:visibility="@{gia.depthPct ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_scale"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/proportion"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_depthPct"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.depthPct ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_depthPct"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/depth"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_depthPct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_depthPct"
+                android:gravity="center|left"
+                android:text="@{gia.depthPct}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_tablePct"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.tablePct  ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_tablePct"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/table"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_tablePct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_tablePct"
+                android:gravity="center|left"
+                android:text="@{gia.tablePct}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_crownangle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.crownangle  ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_crownangle"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/crownAngle"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_crownangle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_crownangle"
+                android:gravity="center|left"
+                android:text="@{gia.crownangle}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_crownheight"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.crownheight ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_crownheight"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/crownHeight"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_crownheight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_crownheight"
+                android:gravity="center|left"
+                android:text="@{gia.crownheight}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_pavilionangle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.pavilionangle  ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_pavilionangle"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/pavilionAngle"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_pavilionangle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_pavilionangle"
+                android:gravity="center|left"
+                android:text="@{gia.pavilionangle}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_paviliondepth"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.paviliondepth ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_paviliondepth"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/pavilionDepth"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_paviliondepth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_paviliondepth"
+                android:gravity="center|left"
+                android:text="@{gia.paviliondepth}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_starlength"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.starlength ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_starlength"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/starLength"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_starlength"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_starlength"
+                android:gravity="center|left"
+                android:text="@{gia.starlength}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_lowerhalf"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.lowerhalf ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_lowerhalf"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/lowerHalf"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_lowerhalf"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_lowerhalf"
+                android:gravity="center|left"
+                android:text="@{gia.lowerhalf}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_girdle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.girdle ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_girdle"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/girdle"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_girdle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_girdle"
+                android:gravity="center|left"
+                android:text="@{gia.girdle}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_culet"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.culet ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_culet"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/culet"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_culet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_culet"
+                android:gravity="center|left"
+                android:text="@{gia.culet}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_title_cutgrade"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/grey_100"
+            android:clickable="true"
+            android:visibility="@{gia.polish ==null ? View.GONE : View.VISIBLE}">
+
+            <TextView
+                android:id="@+id/tv_title_cutgrade"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/cut"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_polish"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.polish ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_polish"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/polish"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_polish"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_polish"
+                android:gravity="center|left"
+                android:text="@{gia.polish}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_symmetry"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.symmetry ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_symmetry"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/symmetry"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_symmetry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_symmetry"
+                android:gravity="center|left"
+                android:text="@{gia.symmetry}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_title_fluorescence"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/grey_100"
+            android:clickable="true"
+            android:visibility="@{gia.fluorescence ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_title_fluorescence"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/fluore"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_fluorescence"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.fluorescence ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_fluorescence"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/fluore"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_fluorescence"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_fluorescence"
+                android:gravity="center|left"
+                android:text="@{gia.fluorescence}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_clarityKeys"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.clarityKeys ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_clarityKeys"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/clarityCharacteristics"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_clarityKeys"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_clarityKeys"
+                android:gravity="center|left"
+                android:text="@{gia.clarityKeys}"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="#dadada" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/re_reportcomments"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:visibility="@{gia.reportcomments ==null ? View.GONE : View.VISIBLE}">
+            <TextView
+                android:id="@+id/tv_temp_reportcomments"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/comments"
+                android:textColor="#353535"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_reportcomments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:singleLine="false"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@id/tv_temp_reportcomments"
+                android:gravity="center|left"
+                android:text="@{gia.reportcomments}"
+                android:textColor="#AAAAAA"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </LinearLayout>
+    </ScrollView>
+    </layout>
