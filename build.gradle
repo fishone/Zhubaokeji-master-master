@@ -2,17 +2,19 @@
 
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         classpath 'com.tencent.bugly:symtabfileuploader:latest.release'
-        // tinkersupport插件, 其中lastest.release指拉取最新版本，也可以指定明确版本号，例如1.0.4
-        classpath "com.tencent.bugly:tinker-support:1.0.8"
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'  //添加这一行
+        // tinkersupport插件(1.0.3以上无须再配置tinker插件）
+        classpath "com.tencent.bugly:tinker-support:1.1.1"
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+
     }
 }
 
@@ -23,8 +25,8 @@ allprojects {
 }
 ext {
     compileSdkVersion = 25
-    buildToolsVersion = '25.0.2'
-    minSdkVersion = 20
+    buildToolsVersion = '26.0.2'
+    minSdkVersion = 23
     targetSdkVersion = compileSdkVersion
 
     supportLibVersion = '25.3.1'

@@ -8,7 +8,7 @@ bugly {
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.zhubaokeji.android"
@@ -126,40 +126,64 @@ dependencies {
     compile "com.android.support:cardview-v7:$supportLibVersion"
     compile "com.android.support:percent:$supportLibVersion"
     compile project(':library')
-    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.3' //Android底部导航栏
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.3'
+
+    //Android底部导航栏
     compile files('libs/universal-image-loader-1.9.5.jar')
     compile(name: 'photoview-release-1.2.4', ext: 'aar')
     compile(name: 'AndroidUtils', ext: 'aar')
     testCompile 'junit:junit:4.12'
-    compile 'com.umeng.analytics:analytics:latest.integration'   //友盟
+    compile 'com.umeng.analytics:analytics:latest.integration'
+
+    //友盟
+
     //序列化Java对象为JSON字符串，或反序列化JSON字符串成Java对象
     compile 'com.google.code.gson:gson:2.8.0'
+
     //ButterKnife是一个专注于Android系统的View注入框架,可以减少大量的findViewById以及setOnClickListener代码，可视化一键生成。
-    compile 'com.jakewharton:butterknife:8.4.0'
-    //ButterKnife是一个专注于Android系统的View注入框架,可以减少大量的findViewById以及setOnClickListener代码，可视化一键生成。
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    implementation  'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     //仿iOS的PickerView控件，有时间选择和选项选择，并支持一二三级联动，支持自定义样式
     compile 'com.contrarywind:Android-PickerView:3.0.5'
+
     //Android广告图片轮播控件，支持无限循环和多种主题，可以灵活设置轮播样式、动画、轮播和切换时间、位置、图片加载框架等！
     compile 'cn.bingoogolapple:bga-banner:2.1.7@aar'
 
     //注释掉原有bugly的仓库
     compile "com.android.support:multidex:1.0.1" // 多dex配置
-    //compile 'com.tencent.bugly:crashreport:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.3.2
-    compile 'com.tencent.bugly:crashreport_upgrade:1.3.1'
+    // 远程仓库集成方式（推荐）
+    compile 'com.tencent.bugly:crashreport_upgrade:1.3.4'
     compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
 
-    compile 'com.github.bumptech.glide:glide:3.7.0' //glide图片显示
-    compile 'com.lzy.net:okgo:3.0.2' //okgo 网络请求框架
-    compile 'com.lcodecorex:tkrefreshlayout:1.0.7' //支持下拉刷新和上拉加载的RefreshLayout
-    compile 'com.orhanobut:logger:2.1.1' //简单，漂亮和强大的记录器为Android
-    compile 'com.github.andremion:counterfab:1.0.1' //FloatingActionButton 第三方
-    compile 'com.yanzhenjie:recyclerview-swipe:1.0.4' //多功能的RecyclerView
-    compile 'com.readystatesoftware.chuck:library:1.0.4'
-    compile 'com.kelin.scrollablepanel:library:1.2.0' //二维RecyclerView
- //   compile 'com.google.guava:guava:22.0-android' //包含很多Java工具类集的库
-    compile 'com.blankj:utilcode:1.8.1' //Java工具类集的库
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 
+    //glide图片显示
+    compile 'com.lzy.net:okgo:3.0.2'
+
+    //okgo 网络请求框架
+    compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
+
+    //支持下拉刷新和上拉加载的RefreshLayout
+    compile 'com.orhanobut:logger:2.1.1'
+
+    //简单，漂亮和强大的记录器为Android
+    compile 'com.github.andremion:counterfab:1.0.1'
+
+    //FloatingActionButton 第三方
+    compile 'com.yanzhenjie:recyclerview-swipe:1.0.4'
+
+    //多功能的RecyclerView
+    compile 'com.readystatesoftware.chuck:library:1.0.4'
+    compile 'com.kelin.scrollablepanel:library:1.2.0'
+
+    //二维RecyclerView
+
+    //   compile 'com.google.guava:guava:22.0-android' //包含很多Java工具类集的库
+    compile 'com.blankj:utilcode:1.8.1'
+
+    //Java工具类集的库
 }
 bugly {
     debug = false
