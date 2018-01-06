@@ -8,7 +8,7 @@ bugly {
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion '26.0.2'
+    buildToolsVersion  rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.zhubaokeji.android"
@@ -111,6 +111,7 @@ android {
             dirs 'libs' //this way we can find the .aar file in libs folder
         }
     }
+    buildToolsVersion '27.0.1'
 }
 
 
@@ -172,18 +173,16 @@ dependencies {
     compile 'com.github.andremion:counterfab:1.0.1'
 
     //FloatingActionButton 第三方
-    compile 'com.yanzhenjie:recyclerview-swipe:1.0.4'
+    compile 'com.yanzhenjie:recyclerview-swipe:1.0.4'//多功能的RecyclerView
 
-    //多功能的RecyclerView
-    compile 'com.readystatesoftware.chuck:library:1.0.4'
-    compile 'com.kelin.scrollablepanel:library:1.2.0'
+    //Chuck是Android OkHttp客户端的一个简单的应用内HTTP检查器
+    debugCompile 'com.readystatesoftware.chuck:library:1.1.0'
+    releaseCompile 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 
-    //二维RecyclerView
+    compile 'com.kelin.scrollablepanel:library:1.2.0'//二维RecyclerView
 
     //   compile 'com.google.guava:guava:22.0-android' //包含很多Java工具类集的库
     compile 'com.blankj:utilcode:1.8.1'
-
-    //Java工具类集的库
 }
 bugly {
     debug = false
