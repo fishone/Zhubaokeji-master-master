@@ -22,6 +22,7 @@ import java.net.NetworkInterface;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
+import java.util.Locale;
 
 import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
 import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
@@ -43,13 +44,16 @@ public class NetUtil {
 
 	private NetUtil(){}
 
+	public static enum NetType {
+		WIFI, CMNET, CMWAP, NONE
+	}
+
 	public static int getNetWorkState(Context context) {
 		// 得到连接管理器对象
 		ConnectivityManager connectivityManager = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-		NetworkInfo activeNetworkInfo = connectivityManager
-				.getActiveNetworkInfo();
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 		if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
 
 			if (activeNetworkInfo.getType() == (ConnectivityManager.TYPE_WIFI)) {
@@ -122,15 +126,36 @@ public class NetUtil {
 	 * @param context
 	 * @return
 	 */
-	public static int getNetType(Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if (cm == null || cm.getActiveNetworkInfo() == null)
-			return -1;
-		else
-			return cm.getActiveNetworkInfo().getType();
+//	public static int getNetType(Context context) {
+//		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//		if (cm == null || cm.getActiveNetworkInfo() == null)
+//			return -1;
+//		else
+//			return cm.getActiveNetworkInfo().getType();
+//
+//	}
 
+
+
+	public static NetType getNetType(Context context) {
+		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		if (networkInfo == null) {
+			return NetType.NONE;
+		}
+		int nType = networkInfo.getType();
+
+		if (nType == ConnectivityManager.TYPE_MOBILE) {
+			if (networkInfo.getExtraInfo().toLowerCase(Locale.getDefault()).equals("cmnet")) {
+				return NetType.CMNET;
+			} else {
+				return NetType.CMWAP;
+			}
+		} else if (nType == ConnectivityManager.TYPE_WIFI) {
+			return NetType.WIFI;
+		}
+		return NetType.NONE;
 	}
-
 	/**
 	 * 获取手机ip
 	 *
@@ -201,7 +226,7 @@ public class NetUtil {
 		return true;
 	}
 
-	public static void  zbException(Context context,Throwable throwable){
+	public static void  myException(Context context,Throwable throwable,String flag){
 		if(throwable !=null)throwable.printStackTrace();
 		if(throwable instanceof UnknownHostException ||throwable instanceof ConnectException){
 			ToastUtil.show(context,"网络未连接,请连接网络");
@@ -213,26 +238,13 @@ public class NetUtil {
 			Logger.e("exception", "SD卡不存在或者没有权限");
 		}
 		else {
-			ToastUtil.show(context,"查询出错，请重试");
+			ToastUtil.show(context,"操作失败，请重试");
 		}
-		if(NetUtil.isZhubaoQuery(context) ==false){
+		if(NetUtil.isZhubaoQuery(context) ==false &&flag.equals("ZB")){
 			context.startActivity(new Intent(context, ZhubaoLoginActivity.class));
 			return;
-		}
-	}
-
-	public static void  jpException(Context context,Throwable throwable){
-		if(throwable !=null)throwable.printStackTrace();
-		if(throwable instanceof UnknownHostException ||throwable instanceof ConnectException){
-			ToastUtil.show(context,"网络未连接,请连接网络");
-		}else if(throwable instanceof SocketTimeoutException){
-			ToastUtil.show(context,"网络请求超时");
-		}else {
-			ToastUtil.show(context,"操作错误，请重试");
-		}
-		if(NetUtil.isJpQuery(context) ==false){
+		}else if(NetUtil.isJpQuery(context) ==false && flag.equals("JP")){
 			context.startActivity(new Intent(context, JpLoginActivity.class));
-			return;
 		}
 	}
 }

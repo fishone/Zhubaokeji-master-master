@@ -20,6 +20,7 @@ import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.bean.UserRegisterRequest;
 import com.zhubaokeji.android.bean.ZhubaoDiamondResponse;
 import com.zhubaokeji.android.callback.JsonCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.base.BaseActivity;
@@ -95,6 +96,11 @@ public class ZhubaoRegisterActivity extends BaseActivity implements View.OnClick
                 overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
+
+    }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
 
     }
 
@@ -181,7 +187,7 @@ public class ZhubaoRegisterActivity extends BaseActivity implements View.OnClick
                     @Override
                     public void onError(Response <LzyResponse> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.zbException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.ZHUBAOKEJI);
                     }
                 });
     }

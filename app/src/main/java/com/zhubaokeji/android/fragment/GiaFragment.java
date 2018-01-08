@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -21,10 +22,8 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ImageUtils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.zhubaokeji.android.bean.LzyJavaResponse;
@@ -32,6 +31,7 @@ import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.callback.JsonCallback;
 import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.ToastUtil;
+import com.zhubaokeji.android.utils.GlideApp;
 import com.zhubaokeji.android.view.ImagePreviewActivity;
 import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.bean.CertificateRequest;
@@ -131,21 +131,21 @@ public class GiaFragment extends Fragment {
                                         giaPic=lzyResponse.getResult();
                                         if(giaPic !=null){
                                             final GiaPic finalGiaPic = giaPic;
-                                                Glide.with(getContext()).load(giaPic.getReportpicSm()).asBitmap().into(new SimpleTarget<Bitmap>() {
-                                                @Override
-                                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                                    reportpic.setImageBitmap(resource);
-                                                    reportImage.add(resource);
-                                                    //拉取净度图
-                                                    Glide.with(getContext()).load(finalGiaPic.getPlotSmPic()).asBitmap().into(new SimpleTarget<Bitmap>() {
-                                                        @Override
-                                                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                                            plotPic.setImageBitmap(resource);
-                                                            reportImage.add(resource);
-                                                        }
-                                                    });
-                                                }
-                                            });
+                                            GlideApp.with(getContext()).asBitmap().load(giaPic.getReportpicSm()).into(new SimpleTarget<Bitmap>() {
+                                                    @Override
+                                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                                        reportpic.setImageBitmap(resource);
+                                                        reportImage.add(resource);
+                                                        //拉取净度图
+                                                        GlideApp.with(getContext()).asBitmap().load(finalGiaPic.getPlotSmPic()).into(new SimpleTarget<Bitmap>() {
+                                                            @Override
+                                                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                                                plotPic.setImageBitmap(resource);
+                                                                reportImage.add(resource);
+                                                            }
+                                                        });
+                                                    }
+                                                });
                                         }
                                         break;
                                     default:
@@ -168,15 +168,15 @@ public class GiaFragment extends Fragment {
     }
 
     void Reportimage() {
-        Glide.with(getActivity()).load(giaCertificateResponse.getReportpicSm()).asBitmap().into(new SimpleTarget<Bitmap>() {
+        GlideApp.with(getActivity()).asBitmap().load(giaCertificateResponse.getReportpicSm()).into(new SimpleTarget<Bitmap>() {
             @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 reportpic.setImageBitmap(resource);
                 reportImage.add(resource);
                 //拉取净度图
-                Glide.with(mContext).load(giaCertificateResponse.getPlotSmPic()).asBitmap().into(new SimpleTarget<Bitmap>() {
+                GlideApp.with(mContext).asBitmap().load(giaCertificateResponse.getPlotSmPic()).into(new SimpleTarget<Bitmap>() {
                     @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         plotPic.setImageBitmap(resource);
                         reportImage.add(resource);
                     }

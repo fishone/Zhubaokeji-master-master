@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.zhubaokeji.android.bean.BasicSetting;
 import com.zhubaokeji.android.base.BaseActivity;
+import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.SharedPreferencesUtil;
 import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.utils.ToastUtil;
@@ -22,6 +23,9 @@ import java.math.BigDecimal;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
 
 /**
  * Created by fisho on 2017/3/20.
@@ -147,5 +151,14 @@ public class BasicSettingsActivity extends BaseActivity {
             }
         }
         return false;
+    }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            zhubao_Login_boolean=false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
     }
 }

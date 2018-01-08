@@ -112,23 +112,22 @@ public class JpLoginActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            relativeTips.setVisibility(View.VISIBLE);
+        }else {
+            relativeTips.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
         OkGo.getInstance().cancelTag(this);
     }
 
-    @Override
-    public void onNetChange(int netMobile) {
-        super.onNetChange(netMobile);
-        //网络状态变化时的操作
-        if (netMobile == -1) {
-            jp_Login_Boolean = false;
-            relativeTips.setVisibility(View.VISIBLE);
-        } else {
-            relativeTips.setVisibility(View.GONE);
-        }
-    }
 
     /**
      * 登陆
@@ -168,8 +167,10 @@ public class JpLoginActivity extends BaseActivity {
                                         ToastUtil.show(mContext, message);
                                 }
                             }
-                        } catch (Exception e) {
-                            Logger.e("JP登录", e);
+                        }catch (Exception e) {
+                            dialog.close();
+                            ToastUtil.show(mContext, "登录失败");
+                            Logger.e("zhubao登录", e);
                         }
                     }
                     @Override
@@ -181,6 +182,8 @@ public class JpLoginActivity extends BaseActivity {
                             ToastUtil.show(mContext,"网络未连接,请连接网络");
                         }else if(throwable instanceof SocketTimeoutException){
                             ToastUtil.show(mContext,"网络请求超时");
+                        }else {
+                            ToastUtil.show(mContext, "登录失败");
                         }
                         dialog.close();
                     }

@@ -1,5 +1,6 @@
 package com.zhubaokeji.android.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import com.zhubaokeji.android.bean.JpSearchRequest;
 import com.zhubaokeji.android.bean.User;
 import com.zhubaokeji.android.bean.ZhubaoColorResponse;
 import com.zhubaokeji.android.databinding.ZhubaoColorDetailsBinding;
+import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.SharedPreferencesUtil;
 import com.zhubaokeji.library.TitleBar;
 
@@ -31,6 +33,8 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import butterknife.OnTouch;
 
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
+
 /**
  * 创建人:YUIZHI
  * 包名：com.zhubaokeji.android.view
@@ -39,6 +43,7 @@ import butterknife.OnTouch;
 public class ZhubaoColorDetailsActivity extends BaseActivity {
 
     ZhubaoColorResponse diamondResponse = new ZhubaoColorResponse();
+    private Activity mContext;
     @BindView(R.id.color_details_reportNo)
     TextView colorDetailsReportNo;
     @BindView(R.id.zhubao_color_details)
@@ -68,6 +73,7 @@ public class ZhubaoColorDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ZhubaoColorDetailsBinding colorDetailsBinding = DataBindingUtil.setContentView(this, R.layout.zhubao_color_details);
         ButterKnife.bind(this);
+        mContext=this;
 
         /**
          * 设置标题栏
@@ -103,6 +109,15 @@ public class ZhubaoColorDetailsActivity extends BaseActivity {
         colorDetailsBinding.setColorDetails(diamondResponse);
     }
 
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            zhubao_Login_boolean=false;
+            startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
+            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
+        }
+    }
+
     @OnClick({R.id.zb_color_offer, R.id.color_details_reportNo})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -125,14 +140,6 @@ public class ZhubaoColorDetailsActivity extends BaseActivity {
         }
     }
 
-//    //点击非Edittext ,取消焦点
-//    @OnTouch({R.id.zhubao_color_details})
-//    public boolean OnTouch(View view, MotionEvent event) {
-//        zhubaoColorDetails.setFocusable(true);
-//        zhubaoColorDetails.setFocusableInTouchMode(true);
-//        zhubaoColorDetails.requestFocus();
-//        return false;
-//    }
 
 
     @OnTouch({R.id.zb_color_percentage, R.id.zb_color_rate})

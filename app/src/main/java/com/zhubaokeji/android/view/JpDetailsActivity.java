@@ -9,14 +9,17 @@ import android.graphics.Paint;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
+import com.zhubaokeji.android.utils.FlagUtil;
+import com.zhubaokeji.android.utils.GlideApp;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -139,6 +142,14 @@ public class JpDetailsActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
@@ -166,15 +177,15 @@ public class JpDetailsActivity extends BaseActivity {
                                         giaPic = lzyResponse.getResult();
                                         if (giaPic != null) {
                                             final GiaPic finalGiaPic = giaPic;
-                                            Glide.with(getApplicationContext()).load(giaPic.getReportpicSm()).asBitmap().into(new SimpleTarget<Bitmap>() {
+                                            GlideApp.with(getApplicationContext()).asBitmap().load(giaPic.getReportpicSm()).into(new SimpleTarget<Bitmap>() {
                                                 @Override
-                                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                                     reportpic.setImageBitmap(resource);
                                                     reportImage.add(resource);
                                                     //拉取净度图
-                                                    Glide.with(getApplicationContext()).load(finalGiaPic.getPlotSmPic()).asBitmap().into(new SimpleTarget<Bitmap>() {
+                                                    GlideApp.with(getApplicationContext()).asBitmap().load(finalGiaPic.getPlotSmPic()).into(new SimpleTarget<Bitmap>() {
                                                         @Override
-                                                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                                             plotPic.setImageBitmap(resource);
                                                             reportImage.add(resource);
                                                         }
@@ -195,7 +206,7 @@ public class JpDetailsActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyJavaResponse<GiaPic>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.jpException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.JP);
                     }
                 });
 
@@ -287,7 +298,7 @@ public class JpDetailsActivity extends BaseActivity {
                             @Override
                             public void onError(Response<LzyResponse> response) {
                                 //网络请求失败的回调,一般会弹个Toast
-                                NetUtil.jpException(mContext,response.getException());
+                                NetUtil.myException(mContext,response.getException(),FlagUtil.JP);
                             }
                         });
                 break;

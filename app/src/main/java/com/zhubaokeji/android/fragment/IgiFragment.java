@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.bumptech.glide.util.Util;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -29,6 +30,7 @@ import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.callback.JsonCallback;
 import com.zhubaokeji.android.utils.ToastUtil;
 import com.zhubaokeji.android.utils.Urls;
+import com.zhubaokeji.android.utils.GlideApp;
 import com.zhubaokeji.android.view.ImagePreviewActivity;
 import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.bean.CertificateRequest;
@@ -131,15 +133,15 @@ public class IgiFragment extends Fragment {
                                         giaPic=lzyResponse.getResult();
                                         if(giaPic !=null){
                                             final GiaPic finalGiaPic = giaPic;
-                                            Glide.with(mContext).load(giaPic.getReportpicSm()).asBitmap().into(new SimpleTarget<Bitmap>() {
+                                            GlideApp.with(mContext).asBitmap().load(giaPic.getReportpicSm()).into(new SimpleTarget<Bitmap>() {
                                                 @Override
-                                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                                     igiReportpic.setImageBitmap(resource);
                                                     reportImage.add(resource);
                                                     //拉取净度图
-                                                    Glide.with(mContext).load(finalGiaPic.getPlotSmPic()).asBitmap().into(new SimpleTarget<Bitmap>() {
+                                                    GlideApp.with(mContext).asBitmap().load(finalGiaPic.getPlotSmPic()).into(new SimpleTarget<Bitmap>() {
                                                         @Override
-                                                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                                             igiPlotPic.setImageBitmap(resource);
                                                             reportImage.add(resource);
                                                         }
@@ -170,15 +172,15 @@ public class IgiFragment extends Fragment {
     }
 
     void Reportimage() {
-        Glide.with(getActivity()).load(igiCertificateResponse.getReportpicSm()).asBitmap().into(new SimpleTarget<Bitmap>() {
+        GlideApp.with(getActivity()).asBitmap().load(igiCertificateResponse.getReportpicSm()).into(new SimpleTarget<Bitmap>() {
             @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 igiReportpic.setImageBitmap(resource);
                 reportImage.add(resource);
                 //拉取净度
-                Glide.with(getActivity()).load(igiCertificateResponse.getPlotSmPic()).asBitmap().into(new SimpleTarget<Bitmap>() {
+                GlideApp.with(getActivity()).asBitmap().load(igiCertificateResponse.getPlotSmPic()).into(new SimpleTarget<Bitmap>() {
                     @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         igiPlotPic.setImageBitmap(resource);
                         reportImage.add(resource);
                     }

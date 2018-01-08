@@ -15,6 +15,7 @@ import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.bean.LzyListResponse;
 import com.zhubaokeji.android.callback.DialogCallback;
 import com.zhubaokeji.android.callback.JsonCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.bean.JpSearchRequest;
 import com.zhubaokeji.android.bean.ZhubaoDiamondResponse;
@@ -174,7 +175,7 @@ public class ZhubaoResultActivity extends BaseActivity {
                                 @Override
                                 public void onError(Response<LzyResponse> response) {
                                     //网络请求失败的回调,一般会弹个Toast
-                                    NetUtil.zbException(mContext,response.getException());
+                                    NetUtil.myException(mContext,response.getException(), FlagUtil.ZHUBAOKEJI);
                                 }
                             });
                 }
@@ -231,21 +232,19 @@ public class ZhubaoResultActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //Activity销毁时，取消网络请求
-        OkGo.getInstance().cancelTag(this);
-    }
-
-    @Override
-    public void onNetChange(int netMobile) {
-        super.onNetChange(netMobile);
-        //网络状态变化时的操作
-        if(netMobile ==-1){
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
             zhubao_Login_boolean=false;
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
             mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //Activity销毁时，取消网络请求
+        OkGo.getInstance().cancelTag(this);
     }
 
     private void PullingUp(final int freshen) {
@@ -301,7 +300,7 @@ public class ZhubaoResultActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyListResponse<ArrayList<ZhubaoDiamondResponse>>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.zbException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(),FlagUtil.ZHUBAOKEJI);
                     }
                 });
     }

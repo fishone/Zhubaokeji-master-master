@@ -1,6 +1,9 @@
 package com.zhubaokeji.android.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +12,14 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.bean.JpShoppingCartResponse;
 import com.zhubaokeji.android.listener.OnItemListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,107 +28,101 @@ import butterknife.ButterKnife;
  * Created by fisho on 2017/5/15.
  */
 
-public class JpShoppingCartAdapter extends SwipeMenuAdapter<JpShoppingCartAdapter.DefaultViewHolder> {
+public class JpShoppingCartAdapter extends BaseQuickAdapter<JpShoppingCartResponse,JpShoppingCartAdapter.ShoppingHolder> {
 
     private Context mContext;
-    private ArrayList<JpShoppingCartResponse> mDataList;
+    private List<JpShoppingCartResponse> mDataList;
     private LayoutInflater mInflater;
     private OnItemListener mOnItemListener;
+
+    public JpShoppingCartAdapter(int layoutResId, @Nullable List<JpShoppingCartResponse> data) {
+        super(layoutResId, data);
+        this.mDataList=data;
+    }
 
     public void setOnItemListener(OnItemListener onItemListener) {
         this.mOnItemListener = onItemListener;
     }
 
-    public JpShoppingCartAdapter(Context context, ArrayList<JpShoppingCartResponse> dataList) {
-        this.mContext = context;
-        this.mDataList = dataList;
-        mInflater = LayoutInflater.from(context);
-    }
-
     @Override
-    public void onBindViewHolder(final DefaultViewHolder holder, final int position) {
-        final JpShoppingCartResponse jpShoppingCartResponse = mDataList.get(position);
-        holder.jpShoppingSaleback.setText(jpShoppingCartResponse.getSaleback());
-        holder.jpShoppingSaleprice.setText(jpShoppingCartResponse.getSaleprice());
-        holder.jpShoppingEyeclean.setText(jpShoppingCartResponse.getEyeclean());
-        holder.jpShoppingReportno.setText(jpShoppingCartResponse.getReportno());
-        holder.jpShoppingEndsaleback.setText(jpShoppingCartResponse.getEndsaleback());
-        holder.jpShoppingBgm.setText(jpShoppingCartResponse.getMilky() +" "+jpShoppingCartResponse.getColsh()+ " "+ jpShoppingCartResponse.getGreen());
-        holder.jpShoppingIsokname.setText(jpShoppingCartResponse.getIsokname());
-        holder.jpShoppingInfo.setText(jpShoppingCartResponse.toString());
-        holder.select.setChecked(jpShoppingCartResponse.isSelect());
-        if(jpShoppingCartResponse.getAddress().equals("ind")){
-            holder.jpShoppingAddress.setText("ind");
-            holder.jpShoppingAddress.setTextColor(mContext.getResources().getColor(R.color.red_500));
+    protected void convert(final ShoppingHolder helper, JpShoppingCartResponse item) {
+        final int position=helper.getLayoutPosition();
+        helper.jpShoppingSaleback.setText(item.getSaleback());
+        helper.jpShoppingSaleprice.setText(item.getSaleprice());
+        helper.jpShoppingEyeclean.setText(item.getEyeclean());
+        helper.jpShoppingReportno.setText(item.getReportno());
+
+
+        helper.jpShoppingEndsaleback.setText(item.getEndsaleback());
+        helper.jpShoppingBgm.setText(item.getMilky() +" "+item.getColsh()+ " "+ item.getGreen());
+        helper.jpShoppingIsokname.setText(item.getIsokname());
+        helper.jpShoppingInfo.setText(item.toString());
+        helper.select.setChecked(item.isSelect());
+        if(item.getAddress().equals("ind")){
+            helper.jpShoppingAddress.setText("ind");
+            helper.jpShoppingAddress.setTextColor(mContext.getResources().getColor(R.color.red_500));
         }else {
-            holder.jpShoppingAddress.setText(jpShoppingCartResponse.getAddress());
+            helper.jpShoppingAddress.setText(item.getAddress());
         }
-        holder.offerSelect.setChecked(jpShoppingCartResponse.isOfferSelect());
-        if (jpShoppingCartResponse.isOfferSelect()) {
-            holder.jpShoppingSaleprice.setTextColor(mContext.getResources().getColor(R.color.red_500));
-            holder.jpShoppingEndsaleback.setTextColor(mContext.getResources().getColor(R.color.red_500));
+        helper.offerSelect.setChecked(item.isOfferSelect());
+        if (item.isOfferSelect()) {
+            helper.jpShoppingSaleprice.setTextColor(mContext.getResources().getColor(R.color.red_500));
+            helper.jpShoppingEndsaleback.setTextColor(mContext.getResources().getColor(R.color.red_500));
         } else {
-            holder.jpShoppingSaleprice.setTextColor(mContext.getResources().getColor(R.color.grey_900));
-            holder.jpShoppingEndsaleback.setTextColor(mContext.getResources().getColor(R.color.grey_900));
+            helper.jpShoppingSaleprice.setTextColor(mContext.getResources().getColor(R.color.grey_900));
+            helper.jpShoppingEndsaleback.setTextColor(mContext.getResources().getColor(R.color.grey_900));
         }
-        if (jpShoppingCartResponse.isSelect()) {
-            holder.layoutOffer.setVisibility(View.VISIBLE);
+        if (item.isSelect()) {
+            helper.layoutOffer.setVisibility(View.VISIBLE);
         } else {
-            holder.layoutOffer.setVisibility(View.GONE);
-            holder.offerSelect.setChecked(false);
+            helper.layoutOffer.setVisibility(View.GONE);
+            helper.offerSelect.setChecked(false);
         }
-        holder.jpShoppingReportno.setOnClickListener(new View.OnClickListener() {
+
+        helper.jpShoppingReportno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mOnItemListener.onItemReportClick(mDataList.get(position));
             }
         });
 
-        holder.select.setOnClickListener(new View.OnClickListener() {
+        helper.select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isSelect = holder.select.isChecked();
+                boolean isSelect = helper.select.isChecked();
                 if (isSelect) {
-                    holder.layoutOffer.setVisibility(View.VISIBLE);
+                    helper.layoutOffer.setVisibility(View.VISIBLE);
                 }
                 mOnItemListener.onItemClick(position, isSelect);
             }
         });
 
-        holder.offerSelect.setOnClickListener(new View.OnClickListener() {
+        helper.offerSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isSelect = holder.offerSelect.isChecked();
+                boolean isSelect = helper.offerSelect.isChecked();
                 mOnItemListener.onItemyOfferClick(position, isSelect);
             }
         });
     }
 
-    @Override
-    public View onCreateContentView(ViewGroup parent, int viewType) {
-        return LayoutInflater.from(parent.getContext()).inflate(R.layout.jp_shoppingcart_item, parent, false);
-    }
 
     @Override
-    public DefaultViewHolder onCompatCreateViewHolder(View realContentView, int viewType) {
-        DefaultViewHolder viewHolder = new DefaultViewHolder(realContentView);
-        return viewHolder;
-    }
-
-    @Override
-    public int getItemCount() {
-        return mDataList == null ? 0 : mDataList.size();
+    protected View getItemView(int layoutResId, ViewGroup parent) {
+        ViewDataBinding binding = DataBindingUtil.inflate(mLayoutInflater, layoutResId, parent, false);
+        if (binding == null) {
+            return super.getItemView(layoutResId, parent);
+        }
+        View view = binding.getRoot();
+        return view;
     }
 
     public void remove(int itemModel) {
         mDataList.remove(itemModel);
     }
 
-    public int getItem(int pos) {
-        return pos;
-    }
 
-    public class DefaultViewHolder extends RecyclerView.ViewHolder {
+    public static class ShoppingHolder extends BaseViewHolder {
         @BindView(R.id.select)
         CheckBox select;
         @BindView(R.id.offerSelect)
@@ -149,8 +148,8 @@ public class JpShoppingCartAdapter extends SwipeMenuAdapter<JpShoppingCartAdapte
         @BindView(R.id.layout_offer)
         LinearLayout layoutOffer;
 
-        public DefaultViewHolder(View itemView) {
-            super(itemView);
+        public ShoppingHolder(View view) {
+            super(view);
             ButterKnife.bind(this, itemView);
         }
     }

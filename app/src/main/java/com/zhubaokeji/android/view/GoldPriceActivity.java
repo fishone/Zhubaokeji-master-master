@@ -32,6 +32,9 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
+
 /**
  * Created by Yuizhi on 2017/1/3.
  */
@@ -88,6 +91,16 @@ public class GoldPriceActivity extends BaseActivity {
             timer.schedule(task, 10, 10000); // 1s后执行task,经过10s再次执行
         }
     }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            zhubao_Login_boolean=false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

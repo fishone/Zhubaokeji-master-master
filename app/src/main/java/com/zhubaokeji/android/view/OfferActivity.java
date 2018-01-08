@@ -18,6 +18,7 @@ import com.zhubaokeji.android.bean.RapDiamondResponse;
 import com.zhubaokeji.android.bean.ZhubaoColorResponse;
 import com.zhubaokeji.android.bean.ZhubaoDiamondResponse;
 import com.zhubaokeji.android.base.BaseActivity;
+import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.library.TitleBar;
 
 import butterknife.BindView;
@@ -105,6 +106,11 @@ public class OfferActivity extends BaseActivity {
             round.setText("");
             noRound.setText("形状 克拉 颜色-强度-光彩 均衡 净度 抛光 对称 荧光 RMB/粒 证书类型");
         }
+
+    }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
 
     }
 

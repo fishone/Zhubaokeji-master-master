@@ -12,4 +12,5 @@ public class SampleApplication extends TinkerApplication {
         super(ShareConstants.TINKER_ENABLE_ALL, "com.zhubaokeji.android.SampleApplicationLike",
                 "com.tencent.tinker.loader.TinkerLoader", false);
     }
+
 }

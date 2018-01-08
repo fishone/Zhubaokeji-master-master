@@ -12,6 +12,7 @@ import com.zhubaokeji.android.bean.JpOrderRequest;
 import com.zhubaokeji.android.bean.JpOrderResponse;
 import com.zhubaokeji.android.bean.LzyListResponse;
 import com.zhubaokeji.android.callback.DialogCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.adapter.JpOrderAdapter;
@@ -79,6 +80,14 @@ public class JpOrderResultActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
@@ -140,7 +149,7 @@ public class JpOrderResultActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyListResponse<ArrayList<JpOrderResponse>>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.jpException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.JP);
                     }
                 });
 

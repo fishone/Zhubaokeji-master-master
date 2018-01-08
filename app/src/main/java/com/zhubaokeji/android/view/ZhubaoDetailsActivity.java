@@ -27,6 +27,7 @@ import com.zhubaokeji.android.bean.SupplierResponse;
 import com.zhubaokeji.android.bean.ZhubaoDiamondResponse;
 import com.zhubaokeji.android.callback.DialogCallback;
 import com.zhubaokeji.android.databinding.ZhubaoDetailsBinding;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.StringUtil;
 import com.zhubaokeji.android.utils.Urls;
@@ -38,6 +39,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
+
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
 
 /**
  * Created by Yuizhi on 2016/12/27.
@@ -122,6 +125,15 @@ public class ZhubaoDetailsActivity extends BaseActivity {
         editRate.setOnFocusChangeListener(new MobileOnFocusChanageListener());
     }
 
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            zhubao_Login_boolean=false;
+            startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
+            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
+        }
+    }
+
     //MobileOnFocusChanageListener焦点监听器
     private class MobileOnFocusChanageListener implements View.OnFocusChangeListener {
         @Override
@@ -161,7 +173,7 @@ public class ZhubaoDetailsActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyResponse<SupplierResponse>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.zbException(mContext, response.getException());
+                        NetUtil.myException(mContext, response.getException(), FlagUtil.ZHUBAOKEJI);
                     }
                 });
     }

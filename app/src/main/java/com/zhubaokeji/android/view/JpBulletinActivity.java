@@ -17,6 +17,8 @@ import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.adapter.JpBulletinAdapter;
 import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.callback.DialogCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
+import com.zhubaokeji.android.utils.ToastUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.bean.JpBulletinResponse;
 import com.zhubaokeji.android.fragment.MyStatusView;
@@ -30,6 +32,8 @@ import java.util.ArrayList;
 import com.lzy.okgo.model.Response;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
 
 
 /**
@@ -83,6 +87,15 @@ public class JpBulletinActivity extends BaseActivity {
         }
         initialise();
     }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -141,7 +154,7 @@ public class JpBulletinActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyResponse<ArrayList<JpBulletinResponse>>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.jpException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.JP);
                     }
                 });
     }

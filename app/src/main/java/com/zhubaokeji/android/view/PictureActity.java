@@ -1,5 +1,6 @@
 package com.zhubaokeji.android.view;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.webkit.WebViewClient;
 import com.lzy.okgo.OkGo;
 import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.base.BaseActivity;
+import com.zhubaokeji.android.utils.NetUtil;
+import com.zhubaokeji.android.utils.ToastUtil;
 import com.zhubaokeji.library.TitleBar;
 
 import butterknife.ButterKnife;
@@ -24,11 +27,14 @@ public class PictureActity extends BaseActivity{
     private WebView webView;
     private ProgressDialog dialog;
     private String url;
+    private Activity mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
         ButterKnife.bind(this);
+        mContext=this;
+
         /**
          * 设置标题栏
          */
@@ -53,6 +59,13 @@ public class PictureActity extends BaseActivity{
         });
         url = getIntent().getStringExtra("url");
         init();
+    }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
     }
 
     private void init() {
@@ -109,7 +122,9 @@ public class PictureActity extends BaseActivity{
                     dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                     dialog.setProgress(newProgress);
                     dialog.setCancelable(true);
-                    dialog.show();
+                    if(!PictureActity.this.isFinishing()){
+                        dialog.show();
+                    }
                 } else {
                     dialog.setProgress(newProgress);
                 }

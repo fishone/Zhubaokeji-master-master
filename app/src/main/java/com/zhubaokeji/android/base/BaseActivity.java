@@ -29,21 +29,29 @@ import butterknife.ButterKnife;
  * Created by fisho on 2017/3/21.
  */
 
-public class  BaseActivity extends AppCompatActivity implements NetBroadcastReceiver.NetEvevt {
+public abstract class  BaseActivity extends AppCompatActivity  {
 
-    public static NetBroadcastReceiver.NetEvevt evevt;
     /**
-     * 网络类型
+     * 网络观察者
      */
-    private int netMobile;
+    protected NetBroadcastReceiver.NetEvevt mNetChangeObserver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        evevt = this;
-        inspectNet();
+
+        // 网络改变的一个回掉类
+        mNetChangeObserver = new NetBroadcastReceiver.NetEvevt() {
+            @Override
+            public void onNetConnected(NetUtil.NetType type) {
+                onNetworkConnected(type);
+            }
+        };
+        //开启广播去监听 网络 改变事件
+        NetBroadcastReceiver.registerObserver(mNetChangeObserver);
     }
+
 
 
     @Override
@@ -72,24 +80,7 @@ public class  BaseActivity extends AppCompatActivity implements NetBroadcastRece
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
-    /**
-     * 初始化时判断有没有网络
-     */
 
-    public boolean inspectNet() {
-        this.netMobile = NetUtil.getNetWorkState(this);
-        return isNetConnect();
-    }
-
-    /**
-     * 网络变化之后的类型
-     */
-    @Override
-    public void onNetChange(int netMobile) {
-        // TODO Auto-generated method stub
-        this.netMobile = netMobile;
-        isNetConnect();
-    }
 
     public static void initImageLoader(Context context) {
 
@@ -143,20 +134,11 @@ public class  BaseActivity extends AppCompatActivity implements NetBroadcastRece
         }
         return false;
     }
-    /**
-     * 判断有无网络 。
-     *
-     * @return true 有网, false 没有网络.
-     */
-    public boolean isNetConnect() {
-        if (netMobile == 1) {
-            return true;
-        } else if (netMobile == 0) {
-            return true;
-        } else if (netMobile == -1) {
-            return false;
 
-        }
-        return false;
-    }
+    /**
+     * 网络连接状态
+     *
+     * @param type 网络状态
+     */
+    protected abstract void onNetworkConnected(NetUtil.NetType type);
 }

@@ -1,5 +1,6 @@
 package com.zhubaokeji.android.view;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -15,11 +16,16 @@ import com.zhubaokeji.android.bean.BasicSetting;
 import com.zhubaokeji.android.fragment.JpHomeFragment;
 import com.zhubaokeji.android.fragment.ZhubaoHomeFragment;
 import com.zhubaokeji.android.base.BaseActivity;
+import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.SharedPreferencesUtil;
 import com.zhubaokeji.android.utils.StringUtil;
+import com.zhubaokeji.android.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
     private List<Fragment> fragments;
@@ -28,11 +34,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     BasicSetting basicSetting =new BasicSetting();
     private int bottomNavigationBar=0;
     private SharedPreferencesUtil preferencesUtil; //haredPreferences 读写
+    private Activity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mContext=this;
         try {
             if(getIntent().getStringExtra("BottomNavigationBar") !=null){
                 bottomNavigationBar= Integer.parseInt(getIntent().getStringExtra("BottomNavigationBar")); //接收点击详情的数据
@@ -62,6 +70,16 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //            }
 //        });
     }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            zhubao_Login_boolean = false;
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
     private void initView() {
         //得到BottomNavigationBar控件
         BottomNavigationBar navigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);

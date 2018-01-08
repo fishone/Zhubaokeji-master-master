@@ -24,6 +24,7 @@ import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
 import com.zhubaokeji.android.biz.presenter.FolderManager;
 import com.zhubaokeji.android.biz.presenter.SimpleCrashReporter;
+import com.zhubaokeji.android.utils.NetBroadcastReceiver;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -58,6 +59,8 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         Logger.addLogAdapter(new AndroidLogAdapter());
 
         Utils.init(getApplication());
+          /*开启网络广播监听*/
+        NetBroadcastReceiver.registerNetworkStateReceiver(getApplication());
     }
     private void initOkGo() {
         //---------这里给出的是示例代码,告诉你可以这么传,实际使用的时候,根据需要传,不需要就不传-------------//
@@ -140,4 +143,10 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         getApplication().registerActivityLifecycleCallbacks(callbacks);
     }
 
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        NetBroadcastReceiver.unRegisterNetworkStateReceiver(getApplication());
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }

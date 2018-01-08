@@ -1,5 +1,6 @@
 package com.zhubaokeji.android.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
+
 /**
  * Created by fisho on 2017/6/22.
  */
@@ -31,12 +35,14 @@ public class JpVerifyAccountActivity extends BaseActivity {
     TextView verify;
     @BindView(R.id.userName)
     XEditText userName;
+    private Activity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jp_verifyaccount);
         ButterKnife.bind(this);
+        mContext=this;
 
         boolean isImmersive = true;
         initTranslucentStatusBar();
@@ -57,6 +63,14 @@ public class JpVerifyAccountActivity extends BaseActivity {
                 overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
             }
         });
+    }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
     }
 
     @Override

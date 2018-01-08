@@ -158,6 +158,11 @@ public class OnlinepriceTableActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求

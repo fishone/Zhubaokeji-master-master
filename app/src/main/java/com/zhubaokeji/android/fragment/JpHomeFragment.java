@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -20,10 +21,9 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -33,6 +33,7 @@ import com.zhubaokeji.android.callback.JsonCallback;
 import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.utils.ImageSaveUtils;
+import com.zhubaokeji.android.utils.GlideApp;
 import com.zhubaokeji.android.view.JpBulletinActivity;
 import com.zhubaokeji.android.view.JpLoginActivity;
 import com.zhubaokeji.android.view.JpOrderActivity;
@@ -165,11 +166,11 @@ public class JpHomeFragment extends Fragment {
         mContentBanner.setAdapter(new BGABanner.Adapter<ImageView, String>() {
             @Override
             public void fillBannerItem(BGABanner banner, ImageView itemView, String model, int position) {
-                Glide.with(getActivity())
+                GlideApp.with(getActivity())
                         .load(model)
                         .placeholder(R.drawable.jp_default)
                         .error(R.drawable.jp_default)
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .skipMemoryCache(true)
                         .centerCrop()
                         .dontAnimate()
@@ -214,10 +215,10 @@ public class JpHomeFragment extends Fragment {
                                             final String imgName=imgUrl.split("/")[5].split("\\?")[0];
                                             String storePath = getContext().getFilesDir() + "/";
                                             imgAddressList.add(storePath+imgName);
-                                            Glide.with(getActivity()).load(imgUrl).asBitmap().diskCacheStrategy(DiskCacheStrategy.SOURCE).skipMemoryCache(true)
+                                            GlideApp.with(getActivity()).asBitmap().load(imgUrl).diskCacheStrategy(DiskCacheStrategy.ALL).skipMemoryCache(true)
                                                     .into(new SimpleTarget<Bitmap>() {
                                                         @Override
-                                                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                                             ImageSaveUtils.saveImageToGallery(mContext,resource,imgName);
                                                         }
                                                     });

@@ -14,11 +14,11 @@ import android.widget.TextView;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.OkGo;
 import com.orhanobut.logger.Logger;
-import com.yanzhenjie.recyclerview.swipe.Closeable;
-import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.adapter.JpShoppingCartAdapter;
@@ -26,6 +26,7 @@ import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.bean.LzyListResponse;
 import com.zhubaokeji.android.callback.DialogCallback;
 import com.zhubaokeji.android.callback.JsonCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.bean.JpShoppingCartResponse;
 import com.zhubaokeji.android.bean.JpUserInfo;
@@ -168,11 +169,12 @@ public class JpShoppingCartActivity extends BaseActivity {
             }
         });
         recyclerShoppingCart.setLayoutManager(new LinearLayoutManager(this));
+
         // 为SwipeRecyclerView的Item创建菜单就两句话，不错就是这么简单：
         // 设置菜单创建器。
         recyclerShoppingCart.setSwipeMenuCreator(swipeMenuCreator);
         // 设置菜单Item点击监听。
-        recyclerShoppingCart.setSwipeMenuItemClickListener(menuItemClickListener);
+        recyclerShoppingCart.setSwipeMenuItemClickListener(mMenuItemClickListener);
         statusView = new MyStatusView(getApplicationContext());
         statusLayout.setStatusView(statusView);
         if(NetUtil.isConnected(this) != true) {
@@ -189,6 +191,14 @@ public class JpShoppingCartActivity extends BaseActivity {
         }
         initData();
         initInfo();
+    }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
     }
 
     private void initInfo() {
@@ -230,7 +240,7 @@ public class JpShoppingCartActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyResponse<JpUserInfo>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.jpException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.JP);
                     }
                 });
     }
@@ -257,12 +267,12 @@ public class JpShoppingCartActivity extends BaseActivity {
                                         LzyListResponse<ArrayList<JpShoppingCartResponse>>.ServerModle serverModle=lzyResponse.getMsgdata();
                                         responseList=GsonUtil.FromJson(serverModle.rows,JpShoppingCartResponse.class);
                                         if (responseList != null) {
-                                            jpShoppingCartAdapter = new JpShoppingCartAdapter(getApplicationContext(), responseList);
+                                            jpShoppingCartAdapter = new JpShoppingCartAdapter(R.layout.jp_shoppingcart_item, responseList);
                                             // 为SwipeRecyclerView的Item创建菜单就两句话，不错就是这么简单：
                                             // 设置菜单创建器。
                                             recyclerShoppingCart.setSwipeMenuCreator(swipeMenuCreator);
                                             // 设置菜单Item点击监听。
-                                            recyclerShoppingCart.setSwipeMenuItemClickListener(menuItemClickListener);
+                                            recyclerShoppingCart.setSwipeMenuItemClickListener(mMenuItemClickListener);
                                             recyclerShoppingCart.setAdapter(jpShoppingCartAdapter);
                                             titleBar.setTitle("购物车" + "(" + responseList.size() + ")");
                                             calculate();
@@ -290,7 +300,7 @@ public class JpShoppingCartActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyListResponse<ArrayList<JpShoppingCartResponse>>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.jpException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(),FlagUtil.JP);
                     }
                 });
     }
@@ -500,7 +510,7 @@ public class JpShoppingCartActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyResponse> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.jpException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(),FlagUtil.JP);
                     }
                 });
     }
@@ -659,7 +669,7 @@ public class JpShoppingCartActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyResponse> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.jpException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(),FlagUtil.JP);
                     }
                 });
         //记得重新设置购物车
@@ -702,7 +712,7 @@ public class JpShoppingCartActivity extends BaseActivity {
             // 添加右侧的，如果不添加，则右侧不会出现菜单。
             {
                 SwipeMenuItem deleteItem = new SwipeMenuItem(mContext)
-                        .setBackgroundDrawable(R.drawable.selector_red)
+                        .setBackground(R.drawable.selector_red)
                         .setText("删除") // 文字，还可以设置文字颜色，大小等。。
                         .setTextColor(Color.BLACK)
                         .setWidth(width)
@@ -715,24 +725,16 @@ public class JpShoppingCartActivity extends BaseActivity {
     /**
      * 菜单点击监听。
      */
-    private OnSwipeMenuItemClickListener menuItemClickListener = new OnSwipeMenuItemClickListener() {
-        /**
-         * Item的菜单被点击的时候调用。
-         * @param closeable       closeable. 用来关闭菜单。
-         * @param adapterPosition adapterPosition. 这个菜单所在的item在Adapter中position。
-         * @param menuPosition    menuPosition. 这个菜单的position。比如你为某个Item创建了2个MenuItem，那么这个position可能是是 0、1，
-         * @param direction       如果是左侧菜单，值是：SwipeMenuRecyclerView#LEFT_DIRECTION，如果是右侧菜单，值是：SwipeMenuRecyclerView
-         *                        #RIGHT_DIRECTION.
-         */
+    SwipeMenuItemClickListener mMenuItemClickListener = new SwipeMenuItemClickListener() {
         @Override
-        public void onItemClick(Closeable closeable, int adapterPosition, int menuPosition, int direction) {
-            closeable.smoothCloseMenu();// 关闭被点击的菜单。
+        public void onItemClick(SwipeMenuBridge menuBridge) {
+            // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
+            menuBridge.closeMenu();
 
-//            if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION) {
-//                Toast.makeText(mContext, "list第" + adapterPosition + "; 右侧菜单第" + menuPosition, Toast.LENGTH_SHORT).show();
-//            }
+            int direction = menuBridge.getDirection(); // 左侧还是右侧菜单。
+            int adapterPosition = menuBridge.getAdapterPosition(); // RecyclerView的Item的position。
+            int menuPosition = menuBridge.getPosition(); // 菜单在RecyclerView的Item中的Position。
 
-            // TODO 如果是删除：推荐调用Adapter.notifyItemRemoved(position)，不推荐Adapter.notifyDataSetChanged();
             if (menuPosition == 0) {// 删除按钮被点击。
                 responseList.remove(adapterPosition);
                 jpShoppingCartAdapter.notifyItemRemoved(adapterPosition);
@@ -745,7 +747,7 @@ public class JpShoppingCartActivity extends BaseActivity {
                             public void onSuccess(Response<LzyResponse> response) {
                                 try {
                                     if (null != response && null !=response.body()) {
-                                       LzyResponse lzyResponse=response.body();
+                                        LzyResponse lzyResponse=response.body();
                                         String message = lzyResponse.message;
                                         switch (lzyResponse.status) {
                                             case 1:
@@ -775,7 +777,7 @@ public class JpShoppingCartActivity extends BaseActivity {
                             @Override
                             public void onError(Response<LzyResponse> response) {
                                 //网络请求失败的回调,一般会弹个Toast
-                                NetUtil.jpException(mContext,response.getException());
+                                NetUtil.myException(mContext,response.getException(),FlagUtil.JP);
                             }
                         });
             }

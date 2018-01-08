@@ -8,10 +8,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
 import com.orhanobut.logger.Logger;
 import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.callback.JsonCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
+import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.bean.JpUserInfo;
 import com.zhubaokeji.android.bean.ResetPassword;
@@ -21,9 +24,15 @@ import com.zhubaokeji.android.utils.ToastUtil;
 import com.zhubaokeji.android.utils.XEditText;
 import com.zhubaokeji.library.TitleBar;
 
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
 
 /**
  * Created by fisho on 2017/6/22.
@@ -80,6 +89,14 @@ public class JpModifyPasswordActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
@@ -96,7 +113,7 @@ public class JpModifyPasswordActivity extends BaseActivity {
                         .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
                         .execute(new JsonCallback<LzyResponse>(LzyResponse.class) {
                             @Override
-                            public void onSuccess(com.lzy.okgo.model.Response<LzyResponse> response) {
+                            public void onSuccess(Response<LzyResponse> response) {
                                 try {
                                     if (null !=response && null !=response.body()){
                                         LzyResponse lzyResponse=response.body();
@@ -112,6 +129,11 @@ public class JpModifyPasswordActivity extends BaseActivity {
                                 }catch (Exception e){
                                     Logger.e("jp 获取验证码",e);
                                 }
+                            }
+                            @Override
+                            public void onError(Response<LzyResponse> response) {
+                                //网络请求失败的回调,一般会弹个Toast
+                                NetUtil.myException(mContext,response.getException(), FlagUtil.JP);
                             }
                         });
                 break;
@@ -137,7 +159,7 @@ public class JpModifyPasswordActivity extends BaseActivity {
                         .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
                         .execute(new JsonCallback<LzyResponse>(LzyResponse.class) {
                             @Override
-                            public void onSuccess(com.lzy.okgo.model.Response<LzyResponse> response) {
+                            public void onSuccess(Response<LzyResponse> response) {
                                 try {
                                     if(null != response && null !=response.body()){
                                         LzyResponse lzyResponse=response.body();
@@ -158,6 +180,11 @@ public class JpModifyPasswordActivity extends BaseActivity {
                                 }catch (Exception e){
                                     Logger.e("JP修改密码",e);
                                 }
+                            }
+                            @Override
+                            public void onError(Response<LzyResponse> response) {
+                                //网络请求失败的回调,一般会弹个Toast
+                                NetUtil.myException(mContext,response.getException(), FlagUtil.JP);
                             }
                         });
                 break;

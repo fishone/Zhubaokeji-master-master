@@ -20,6 +20,8 @@ import com.zhubaokeji.android.biz.presenter.GlideFactory;
 import com.zhubaokeji.android.biz.presenter.ImageLoaderWrapper;
 import com.zhubaokeji.android.base.BaseActivity;
 import com.zhubaokeji.android.biz.presenter.ImageWrapper;
+import com.zhubaokeji.android.utils.NetUtil;
+import com.zhubaokeji.android.utils.ToastUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ import java.util.Map;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 import static com.zhubaokeji.android.fragment.GiaFragment.giaMapList;
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
+
 /**
  * 图片预览界面
  *
@@ -64,10 +69,13 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
 
     private ImageWrapper imageWrapper;
 
+    private Activity mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_preview);
+        mContext=this;
 
         if (Build.VERSION.SDK_INT >= 11) {
             getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
@@ -99,6 +107,15 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
         initImageLoader(this);
         initView();
 
+    }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            zhubao_Login_boolean=false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
     }
 
     private void initView() {

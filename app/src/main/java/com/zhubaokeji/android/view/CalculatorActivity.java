@@ -45,6 +45,9 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import butterknife.OnTouch;
 
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
+
 /**
  * Created by fisho on 2017/2/15.
  */
@@ -190,6 +193,15 @@ public class CalculatorActivity extends BaseActivity implements TextWatcher {
                 queryOnlineprice(onlinepriceReqest);
             }
         });
+    }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            zhubao_Login_boolean=false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
     }
 
 

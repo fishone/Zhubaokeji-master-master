@@ -15,6 +15,7 @@ import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.bean.BasicSetting;
 import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.callback.JsonCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.bean.JpUser;
 import com.zhubaokeji.android.bean.JpUserInfo;
@@ -120,23 +121,22 @@ public class ZhubaoLoginActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            zhubao_Login_boolean = false;
+            relativeTips.setVisibility(View.VISIBLE);
+        }else {
+            relativeTips.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
         OkGo.getInstance().cancelTag(this);
     }
 
-    @Override
-    public void onNetChange(int netMobile) {
-        super.onNetChange(netMobile);
-        //网络状态变化时的操作
-        if (netMobile == -1) {
-            jp_Login_Boolean = false;
-            relativeTips.setVisibility(View.VISIBLE);
-        } else {
-            relativeTips.setVisibility(View.GONE);
-        }
-    }
 
     /**
      * 登陆
@@ -189,14 +189,7 @@ public class ZhubaoLoginActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyResponse<JpUserInfo>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        Throwable throwable=response.getException();
-                        if(throwable !=null)throwable.printStackTrace();
-                        if(throwable instanceof UnknownHostException ||throwable instanceof ConnectException){
-                            ToastUtil.show(mContext,"网络未连接,请连接网络");
-                        }else if(throwable instanceof SocketTimeoutException){
-                            ToastUtil.show(mContext,"网络请求超时");
-                        }
-                        dialog.close();
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.ZHUBAOKEJI);
                     }
                 });
     }

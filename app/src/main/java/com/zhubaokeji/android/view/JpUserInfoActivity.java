@@ -1,5 +1,6 @@
 package com.zhubaokeji.android.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -13,7 +14,9 @@ import com.zhubaokeji.android.bean.JpUser;
 import com.zhubaokeji.android.bean.JpUserInfo;
 import com.zhubaokeji.android.databinding.ZhubaoInfoBinding;
 import com.zhubaokeji.android.base.BaseActivity;
+import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.SharedPreferencesUtil;
+import com.zhubaokeji.android.utils.ToastUtil;
 import com.zhubaokeji.library.TitleBar;
 
 import butterknife.BindView;
@@ -34,12 +37,14 @@ public class JpUserInfoActivity extends BaseActivity{
     @BindView(R.id.re_dropOut)
     RelativeLayout reDropOut;
     JpUserInfo userinfo = null;
+    private Activity mContext;
     private SharedPreferencesUtil preferencesUtil; //haredPreferences 读写
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ZhubaoInfoBinding binding = DataBindingUtil.setContentView(this, R.layout.zhubao_info);
         ButterKnife.bind(this);
+        mContext=this;
         preferencesUtil = new SharedPreferencesUtil(getApplicationContext());
         try {
             userinfo = new JpUserInfo();
@@ -69,6 +74,15 @@ public class JpUserInfoActivity extends BaseActivity{
             }
         });
     }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
     @OnClick({R.id.re_Company, R.id.re_dropOut,R.id.re_intercalate})
     public void onClick(View view) {
         switch (view.getId()) {

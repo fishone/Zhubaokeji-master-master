@@ -19,6 +19,7 @@ import com.zhubaokeji.android.bean.ZhubaoColorResponse;
 import com.zhubaokeji.android.adapter.ColorResultAdapter;
 import com.zhubaokeji.android.bean.LzyListResponse;
 import com.zhubaokeji.android.callback.DialogCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.biz.PullToRefreshLayout;
@@ -173,6 +174,15 @@ public class ZhubaoColorResultActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            zhubao_Login_boolean=false;
+            startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
+            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
@@ -231,7 +241,7 @@ public class ZhubaoColorResultActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyListResponse<ArrayList<ZhubaoColorResponse>>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.zbException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.ZHUBAOKEJI);
                     }
                 });
     }

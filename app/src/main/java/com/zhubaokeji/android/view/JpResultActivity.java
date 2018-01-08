@@ -17,6 +17,7 @@ import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.bean.ZhubaoDiamondResponse;
 import com.zhubaokeji.android.callback.DialogCallback;
 import com.zhubaokeji.android.callback.JsonCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.adapter.JpResultAdapter;
@@ -142,6 +143,14 @@ public class JpResultActivity extends BaseActivity {
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
@@ -198,7 +207,7 @@ public class JpResultActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyListResponse<ArrayList<ZhubaoDiamondResponse>>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.jpException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.JP);
                     }
                 });
     }
@@ -268,7 +277,7 @@ public class JpResultActivity extends BaseActivity {
                                 @Override
                                 public void onError(Response<LzyResponse> response) {
                                     //网络请求失败的回调,一般会弹个Toast
-                                    NetUtil.jpException(mContext,response.getException());
+                                    NetUtil.myException(mContext,response.getException(),FlagUtil.JP);
                                 }
                             });
                 }

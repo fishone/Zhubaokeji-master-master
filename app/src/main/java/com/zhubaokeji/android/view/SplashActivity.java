@@ -80,6 +80,12 @@ public class SplashActivity extends BaseActivity{
             Jplogin(jpUser);
         }
     }
+
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+
+    }
+
     /**
      * 助宝登陆
      * @param user

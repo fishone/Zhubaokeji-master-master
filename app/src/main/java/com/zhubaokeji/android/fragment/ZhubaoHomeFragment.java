@@ -1,11 +1,14 @@
 package com.zhubaokeji.android.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -18,8 +21,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -30,6 +33,7 @@ import com.zhubaokeji.android.utils.SharedPreferencesUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.utils.ImageSaveUtils;
 import com.zhubaokeji.android.view.CalculatorActivity;
+import com.zhubaokeji.android.utils.GlideApp;
 import com.zhubaokeji.android.view.GoldPriceActivity;
 import com.zhubaokeji.android.view.OnlinepriceTableActivity;
 import com.zhubaokeji.android.R;
@@ -136,7 +140,7 @@ public class ZhubaoHomeFragment extends Fragment {
 
             @Override
             public View getView(int index) {
-                LayoutInflater inflater = getLayoutInflater(savedInstanceState);
+                @SuppressLint("RestrictedApi") LayoutInflater inflater = getLayoutInflater(savedInstanceState);
                 View view = inflater.inflate(R.layout.home_item,null);
                 ImageView iv = (ImageView) view.findViewById(R.id.home_image);
                 TextView tv = (TextView) view.findViewById(R.id.home_title);
@@ -215,12 +219,12 @@ public class ZhubaoHomeFragment extends Fragment {
         mContentBanner.setAdapter(new BGABanner.Adapter<ImageView, String>() {
             @Override
             public void fillBannerItem(BGABanner banner, final ImageView itemView, final String model, int position) {
-                Glide.with(getActivity())
-                        .load(model)
+                GlideApp.with(getActivity())
                         .asBitmap()
+                        .load(model)
                         .placeholder(R.drawable.zhubao_default)
                         .error(R.drawable.zhubao_default)
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE )
+                        .diskCacheStrategy(DiskCacheStrategy.ALL )
                         .skipMemoryCache(true)
                         .centerCrop()
                         .dontAnimate()
@@ -260,10 +264,10 @@ public class ZhubaoHomeFragment extends Fragment {
                                             final String imgName=imgUrl.split("/")[5].split("\\?")[0];
                                             String storePath = getContext().getFilesDir() + "/";
                                             imgAddressList.add(storePath+imgName);
-                                            Glide.with(getActivity()).load(imgUrl).asBitmap().diskCacheStrategy(DiskCacheStrategy.SOURCE).skipMemoryCache(true)
+                                            GlideApp.with(getActivity()).asBitmap().load(imgUrl).diskCacheStrategy(DiskCacheStrategy.ALL).skipMemoryCache(true)
                                                     .into(new SimpleTarget<Bitmap>() {
                                                         @Override
-                                                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                                                             ImageSaveUtils.saveImageToGallery(mContext,resource,imgName);
                                                         }
                                                     });

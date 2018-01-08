@@ -30,6 +30,7 @@ import com.zhubaokeji.android.bean.ZhubaoDiamondResponse;
 import com.zhubaokeji.android.adapter.CaratSectionAdapter;
 import com.zhubaokeji.android.bean.LzyListResponse;
 import com.zhubaokeji.android.callback.DialogCallback;
+import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.adapter.SearchAdapter;
 import com.zhubaokeji.android.base.BaseActivity;
@@ -55,6 +56,7 @@ import butterknife.OnTouch;
 
 import com.lzy.okgo.model.Response;
 
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
 import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
 
 /**
@@ -177,6 +179,14 @@ public class ZhubaoSearchActivity extends BaseActivity {
         zhubaoCaratEnd.addTextChangedListener(textChange);
     }
 
+    @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            zhubao_Login_boolean=false;
+            startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
+            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
+        }
+    }
 
 
     @Override
@@ -184,17 +194,6 @@ public class ZhubaoSearchActivity extends BaseActivity {
         super.onDestroy();
         //Activity销毁时，取消网络请求
         OkGo.getInstance().cancelTag(this);
-    }
-
-    @Override
-    public void onNetChange(int netMobile) {
-        super.onNetChange(netMobile);
-        //网络状态变化时的操作
-        if(netMobile ==-1){
-            zhubao_Login_boolean=false;
-            startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
-        }
     }
 
     //初始化适配器
@@ -339,7 +338,7 @@ public class ZhubaoSearchActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyListResponse<ArrayList<ZhubaoDiamondResponse>>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.zbException(mContext,response.getException());
+                        NetUtil.myException(mContext,response.getException(), FlagUtil.ZHUBAOKEJI);
                     }
                 });
     }

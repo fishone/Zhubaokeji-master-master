@@ -44,7 +44,10 @@ import butterknife.OnTouch;
 import com.lzy.okgo.model.Response;
 
 import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+
+import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
 
 /**
  * Created by Yuizhi on 2017/1/3.
@@ -124,6 +127,13 @@ public class ZhengshuActivity extends BaseActivity{
     }
 
     @Override
+    protected void onNetworkConnected(NetUtil.NetType type) {
+        if(type== NetUtil.NetType.NONE){
+            ToastUtil.show(mContext,"网络未连接,请连接网络");
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //Activity销毁时，取消网络请求
@@ -131,9 +141,9 @@ public class ZhengshuActivity extends BaseActivity{
     }
 
     private void query(final CertificateRequest reportRequest) {
-        if(NetUtil.isZhubaoQuery(mContext) ==false){
-            return;
-        }
+//        if(NetUtil.isZhubaoQuery(mContext) ==false){
+//            return;
+//        }
         dialog=new LoadingDialog(mContext,"玩命加载中...");
         dialog.show();
         final String path = Urls.ZHENGSHUURL;
@@ -204,12 +214,17 @@ public class ZhengshuActivity extends BaseActivity{
                     }
                     @Override
                     public void onError(Response<String> response) {
+                        dialog.close();
                         //网络请求失败的回调,一般会弹个Toast
                         Throwable throwable =response.getException();
+                        if(throwable !=null)throwable.printStackTrace();
                         if(throwable instanceof UnknownHostException ||throwable instanceof ConnectException){
                             ToastUtil.show(mContext,"网络未连接,请连接网络");
+                        }else if(throwable instanceof SocketTimeoutException){
+                            ToastUtil.show(mContext,"网络请求超时");
+                        }else {
+                            ToastUtil.show(mContext,"未找到证书");
                         }
-                        ToastUtil.show(mContext,"未找到证书");
                     }
                 });
     }
