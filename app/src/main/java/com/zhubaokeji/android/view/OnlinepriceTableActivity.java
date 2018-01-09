@@ -214,7 +214,7 @@ public class OnlinepriceTableActivity extends BaseActivity {
         colorList.add("F");
         colorList.add("G");
         colorList.add("H");
-        colorList.add("I");
+        colorList.add("DataHolder");
         colorList.add("J");
         colorList.add("K");
         colorList.add("L");
@@ -226,7 +226,7 @@ public class OnlinepriceTableActivity extends BaseActivity {
         popColorList.add("F");
         popColorList.add("G");
         popColorList.add("H");
-        popColorList.add("I");
+        popColorList.add("DataHolder");
         popColorList.add("J");
         popColorList.add("K");
         popColorList.add("L");

@@ -1,35 +1,27 @@
 package com.zhubaokeji.android.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ImageUtils;
-import com.bumptech.glide.Glide;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
+import com.zhubaokeji.android.bean.DataHolder;
 import com.zhubaokeji.android.bean.LzyJavaResponse;
-import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.callback.JsonCallback;
-import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.ToastUtil;
 import com.zhubaokeji.android.utils.GlideApp;
 import com.zhubaokeji.android.view.ImagePreviewActivity;
@@ -39,11 +31,7 @@ import com.zhubaokeji.android.bean.GiaCertificateResponse;
 import com.zhubaokeji.android.bean.GiaPic;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.databinding.GiaZhengshuBinding;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +62,8 @@ public class GiaFragment extends Fragment {
      */
     public byte[] imageInfo;
     public List<byte[]> mImageInfoList;
-    List<Bitmap> reportImage = new ArrayList<>();
+    List<Bitmap> reportImage = new ArrayList<Bitmap>();
+    ArrayList<DataHolder> byteList=null;
     public static final int PREVIEW_REQUEST_CODE = 1000;
     CertificateRequest repoetRequest = new CertificateRequest();
     AnimationDrawable reportAnimation;
@@ -84,7 +73,6 @@ public class GiaFragment extends Fragment {
     private int imageIndex=0;
     private Activity mContext;
     public static Map<String,Bitmap> bitmapMap=new HashMap<>();
-    public static List<Map<String,Bitmap>> giaMapList=new ArrayList<>();
     public static final int REQUEST_CODE_PREVIEW = 101;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -193,16 +181,10 @@ public class GiaFragment extends Fragment {
                     break;
                 }
                 Intent previewIntent = new Intent(getContext(), ImagePreviewActivity.class);
-                giaMapList.clear();
                 imageIndex=0;
-                bitmapMap.put("first",reportImage.get(0));
-                giaMapList.add(bitmapMap);
-                if (reportImage.size() >= 2) {
-                    bitmapMap =new HashMap<>();
-                    bitmapMap.put("second",reportImage.get(1));
-                    giaMapList.add(bitmapMap);
-                }
-                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_INFO,imageIndex);
+                DataHolder.save("IMAGE", reportImage);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_FLAG, imageIndex);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_MAPID, "IMAGE");
                 startActivity(previewIntent);
                 break;
             case R.id.plotPic:
@@ -211,15 +193,9 @@ public class GiaFragment extends Fragment {
                 }
                 previewIntent = new Intent(getContext(), ImagePreviewActivity.class);
                 imageIndex=1;
-                giaMapList.clear();
-                bitmapMap.put("first",reportImage.get(0));
-                giaMapList.add(bitmapMap);
-                if (reportImage.size() >= 2) {
-                    bitmapMap =new HashMap<>();
-                    bitmapMap.put("second",reportImage.get(1));
-                    giaMapList.add(bitmapMap);
-                }
-                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_INFO, imageIndex);
+                DataHolder.save("IMAGE", reportImage);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_FLAG, imageIndex);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_MAPID, "IMAGE");
                 startActivity(previewIntent);
                 break;
         }

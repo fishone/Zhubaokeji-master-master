@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -14,8 +13,9 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ImageUtils;
+import com.blankj.utilcode.util.ConvertUtils;
 import com.zhubaokeji.android.R;
+import com.zhubaokeji.android.bean.DataHolder;
 import com.zhubaokeji.android.biz.presenter.GlideFactory;
 import com.zhubaokeji.android.biz.presenter.ImageLoaderWrapper;
 import com.zhubaokeji.android.base.BaseActivity;
@@ -23,14 +23,11 @@ import com.zhubaokeji.android.biz.presenter.ImageWrapper;
 import com.zhubaokeji.android.utils.NetUtil;
 import com.zhubaokeji.android.utils.ToastUtil;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
-import static com.zhubaokeji.android.fragment.GiaFragment.giaMapList;
 import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
 import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
 
@@ -44,8 +41,8 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
 
     private final static String TAG = ImagePreviewActivity.class.getSimpleName();
 
-    public final static String EXTRA_IMAGE_INFO_LIST = "ImageInfoList";
-    public final static String EXTRA_IMAGE_INFO = "ImageInfo";
+    public final static String EXTRA_IMAGE_MAPID = "IMAGEID";
+    public final static String EXTRA_IMAGE_FLAG = "ImageFlag";
 
     public final static String EXTRA_NEW_IMAGE_LIST = "NewImageList";
     private int imageIndex;
@@ -59,7 +56,7 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
     /**
      * 所有图片的列表
      */
-    private List<Bitmap> mPreviewImageInfoList;
+    private List<Bitmap> mPreviewImageInfoList =new ArrayList<>();
     /**
      * 刚进入页面显示的图片
      */
@@ -70,6 +67,8 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
     private ImageWrapper imageWrapper;
 
     private Activity mContext;
+
+    ArrayList<DataHolder> byteList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +97,9 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
 
         imageWrapper= GlideFactory.getLoader();
         mPreviewImageInfoList=new ArrayList<>();
-        mPreviewImageInfoList.add(giaMapList.get(0).get("first"));
-        if(giaMapList.size() >=2){
-            mPreviewImageInfoList.add(giaMapList.get(1).get("second"));
-        }
-        imageIndex = getIntent().getIntExtra(EXTRA_IMAGE_INFO,0);
+        imageIndex = getIntent().getIntExtra(EXTRA_IMAGE_FLAG,0);
+        String ImageId= getIntent().getExtras().getString(EXTRA_IMAGE_MAPID);
+        mPreviewImageInfoList= (List<Bitmap>) DataHolder.retrieve(ImageId);
         mPreviewImageInfo=mPreviewImageInfoList.get(imageIndex);
         initImageLoader(this);
         initView();

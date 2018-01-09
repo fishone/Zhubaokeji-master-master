@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zhubaokeji.android.bean.DataHolder;
 import com.zhubaokeji.android.utils.FlagUtil;
 import com.zhubaokeji.android.utils.GlideApp;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -52,8 +53,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.zhubaokeji.android.fragment.GiaFragment.giaMapList;
 import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
 
 /**
@@ -220,16 +219,10 @@ public class JpDetailsActivity extends BaseActivity {
                     break;
                 }
                 Intent previewIntent = new Intent(mContext, ImagePreviewActivity.class);
-                giaMapList.clear();
                 imageIndex=0;
-                bitmapMap.put("first",reportImage.get(0));
-                giaMapList.add(bitmapMap);
-                if (reportImage.size() >= 2) {
-                    bitmapMap =new HashMap<>();
-                    bitmapMap.put("second",reportImage.get(1));
-                    giaMapList.add(bitmapMap);
-                }
-                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_INFO,imageIndex);
+                DataHolder.save("IMAGE", reportImage);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_FLAG, imageIndex);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_MAPID, "IMAGE");
                 startActivity(previewIntent);
                 break;
             case R.id.plotPic:
@@ -238,15 +231,9 @@ public class JpDetailsActivity extends BaseActivity {
                 }
                 previewIntent = new Intent(mContext, ImagePreviewActivity.class);
                 imageIndex=1;
-                giaMapList.clear();
-                bitmapMap.put("first",reportImage.get(0));
-                giaMapList.add(bitmapMap);
-                if (reportImage.size() >= 2) {
-                    bitmapMap =new HashMap<>();
-                    bitmapMap.put("second",reportImage.get(1));
-                    giaMapList.add(bitmapMap);
-                }
-                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_INFO, imageIndex);
+                DataHolder.save("IMAGE", reportImage);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_FLAG, imageIndex);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_MAPID, "IMAGE");
                 startActivity(previewIntent);
                 break;
             case R.id.jp_details_report:

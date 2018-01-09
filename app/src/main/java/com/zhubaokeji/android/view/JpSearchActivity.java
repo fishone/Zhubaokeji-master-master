@@ -247,7 +247,7 @@ public class JpSearchActivity extends BaseActivity {
         colorList.add("F");
         colorList.add("G");
         colorList.add("H");
-        colorList.add("I");
+        colorList.add("DataHolder");
         colorList.add("J");
         colorList.add("K");
         colorList.add("L");

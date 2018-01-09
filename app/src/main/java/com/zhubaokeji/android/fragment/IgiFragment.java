@@ -25,6 +25,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 import com.orhanobut.logger.Logger;
+import com.zhubaokeji.android.bean.DataHolder;
 import com.zhubaokeji.android.bean.LzyJavaResponse;
 import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.callback.JsonCallback;
@@ -54,7 +55,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.lzy.okgo.model.Response;
-import static com.zhubaokeji.android.fragment.GiaFragment.giaMapList;
 
 /**
  * Created by Yuizhi on 2017/1/11.
@@ -197,16 +197,10 @@ public class IgiFragment extends Fragment {
                     break;
                 }
                 Intent previewIntent = new Intent(getContext(), ImagePreviewActivity.class);
-                giaMapList.clear();
                 imageIndex=0;
-                bitmapMap.put("first",reportImage.get(0));
-                giaMapList.add(bitmapMap);
-                if (reportImage.size() >= 2) {
-                    bitmapMap =new HashMap<>();
-                    bitmapMap.put("second",reportImage.get(1));
-                    giaMapList.add(bitmapMap);
-                }
-                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_INFO,imageIndex);
+                DataHolder.save("IMAGE", reportImage);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_FLAG, imageIndex);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_MAPID, "IMAGE");
                 startActivity(previewIntent);
                 break;
             case R.id.igi_plotPic:
@@ -215,15 +209,9 @@ public class IgiFragment extends Fragment {
                 }
                 previewIntent = new Intent(getContext(), ImagePreviewActivity.class);
                 imageIndex=1;
-                giaMapList.clear();
-                bitmapMap.put("first",reportImage.get(0));
-                giaMapList.add(bitmapMap);
-                if (reportImage.size() >= 2) {
-                    bitmapMap =new HashMap<>();
-                    bitmapMap.put("second",reportImage.get(1));
-                    giaMapList.add(bitmapMap);
-                }
-                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_INFO, imageIndex);
+                DataHolder.save("IMAGE", reportImage);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_FLAG, imageIndex);
+                previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_MAPID, "IMAGE");
                 startActivity(previewIntent);
                 break;
         }
