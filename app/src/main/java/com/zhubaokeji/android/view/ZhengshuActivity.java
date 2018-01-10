@@ -47,6 +47,7 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import static com.zhubaokeji.android.fragment.JpHomeFragment.jp_Login_Boolean;
 import static com.zhubaokeji.android.fragment.ZhubaoHomeFragment.zhubao_Login_boolean;
 
 /**
@@ -129,6 +130,8 @@ public class ZhengshuActivity extends BaseActivity{
     @Override
     protected void onNetworkConnected(NetUtil.NetType type) {
         if(type== NetUtil.NetType.NONE){
+            jp_Login_Boolean = false;
+            zhubao_Login_boolean=false;
             ToastUtil.show(mContext,"网络未连接,请连接网络");
         }
     }

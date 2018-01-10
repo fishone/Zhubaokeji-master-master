@@ -25,6 +25,7 @@ import com.zhubaokeji.android.bean.LzyResponse;
 import com.zhubaokeji.android.bean.ZhubaoColorResponse;
 import com.zhubaokeji.android.callback.JsonCallback;
 import com.zhubaokeji.android.utils.NetUtil;
+import com.zhubaokeji.android.utils.ToastUtil;
 import com.zhubaokeji.android.utils.Urls;
 import com.zhubaokeji.android.base.BaseActivity;
 //import com.zhubaokeji.android.utils.NetUtil;
@@ -83,7 +84,6 @@ public class SplashActivity extends BaseActivity{
 
     @Override
     protected void onNetworkConnected(NetUtil.NetType type) {
-
     }
 
     /**
