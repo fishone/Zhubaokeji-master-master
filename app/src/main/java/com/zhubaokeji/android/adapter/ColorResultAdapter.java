@@ -102,8 +102,8 @@ public class ColorResultAdapter  extends PanelAdapter {
                 case 1:case 7:case 8:case 9:case 3:
 //                    viewHolder.dateTextView.setPadding(70, 20, 70, 20);
                     LinearLayout.LayoutParams linearParams =  (LinearLayout.LayoutParams)viewHolder.HeaderTextView.getLayoutParams();
-                    linearParams.width =250;
-                    linearParams.height=90;
+                    linearParams.width =300;
+                    linearParams.height=120;
                     viewHolder.HeaderTextView.setGravity(Gravity.CENTER);
                     viewHolder.HeaderTextView.setLayoutParams(linearParams);
                     break;
@@ -115,8 +115,8 @@ public class ColorResultAdapter  extends PanelAdapter {
                     HeaderImageViewLayoutParams.height=40;
                     viewHolder.HeaderImageView.setLayoutParams(HeaderImageViewLayoutParams);
                     LinearLayout.LayoutParams HeaderTextViewLayoutParams =  (LinearLayout.LayoutParams)viewHolder.HeaderTextView.getLayoutParams();
-                    HeaderTextViewLayoutParams.width =160;
-                    HeaderTextViewLayoutParams.height=90;
+                    HeaderTextViewLayoutParams.width =200;
+                    HeaderTextViewLayoutParams.height=120;
                     viewHolder.HeaderTextView.setGravity(Gravity.CENTER);
                     viewHolder.HeaderTextView.setLayoutParams(HeaderTextViewLayoutParams);
                     if(pos ==2){
@@ -131,8 +131,8 @@ public class ColorResultAdapter  extends PanelAdapter {
                     break;
                 case 5:
                     LinearLayout.LayoutParams linearParams3 =  (LinearLayout.LayoutParams)viewHolder.HeaderTextView.getLayoutParams();
-                    linearParams3.width =100;
-                    linearParams3.height=90;
+                    linearParams3.width =200;
+                    linearParams3.height=120;
                     viewHolder.HeaderTextView.setGravity(Gravity.CENTER);
                     viewHolder.HeaderTextView.setLayoutParams(linearParams3);
                     LinearLayout.LayoutParams HeaderImageViewLayoutParams2 =  (LinearLayout.LayoutParams)viewHolder.HeaderImageView.getLayoutParams();
@@ -152,8 +152,8 @@ public class ColorResultAdapter  extends PanelAdapter {
                     break;
                 default:
                     LinearLayout.LayoutParams linearParams2 =  (LinearLayout.LayoutParams)viewHolder.HeaderTextView.getLayoutParams();
-                    linearParams2.width =140;
-                    linearParams2.height=90;
+                    linearParams2.width =200;
+                    linearParams2.height=120;
                     viewHolder.HeaderTextView.setGravity(Gravity.CENTER);
                     viewHolder.HeaderTextView.setLayoutParams(linearParams2);
 //                    viewHolder.dateTextView.setPadding(30, 20, 30, 20);
@@ -202,22 +202,22 @@ public class ColorResultAdapter  extends PanelAdapter {
                 case 1:case 7:case 8:case 9:case 3:
 //                    viewHolder.dateTextView.setPadding(70, 20, 70, 20);
                     RelativeLayout.LayoutParams linearParams =  (RelativeLayout.LayoutParams)viewHolder.contentTextView.getLayoutParams();
-                    linearParams.width =250;
-                    linearParams.height=90;
+                    linearParams.width =300;
+                    linearParams.height=120;
                     viewHolder.contentTextView.setGravity(Gravity.CENTER);
                     viewHolder.contentTextView.setLayoutParams(linearParams);
                     break;
-                case 2:
+                case 2 : case 5:
                     RelativeLayout.LayoutParams linearParams3 =  (RelativeLayout.LayoutParams)viewHolder.contentTextView.getLayoutParams();
-                    linearParams3.width =200;
-                    linearParams3.height=90;
+                    linearParams3.width =240;
+                    linearParams3.height=120;
                     viewHolder.contentTextView.setGravity(Gravity.CENTER);
                     viewHolder.contentTextView.setLayoutParams(linearParams3);
                     break;
                 default:
                     RelativeLayout.LayoutParams linearParams2 =  (RelativeLayout.LayoutParams)viewHolder.contentTextView.getLayoutParams();
-                    linearParams2.width =140;
-                    linearParams2.height=90;
+                    linearParams2.width =200;
+                    linearParams2.height=120;
                     viewHolder.contentTextView.setGravity(Gravity.CENTER);
                     viewHolder.contentTextView.setLayoutParams(linearParams2);
                     break;

@@ -122,8 +122,8 @@ public class JpResultAdapter extends PanelAdapter {
                 case 1:case 4:case 16: case 17:case 12: case 13:
 //                    viewHolder.dateTextView.setPadding(70, 20, 70, 20);
                     LinearLayout.LayoutParams linearParams =  (LinearLayout.LayoutParams)viewHolder.HeaderTextView.getLayoutParams();
-                    linearParams.width =250;
-                    linearParams.height=90;
+                    linearParams.width =300;
+                    linearParams.height=120;
                     viewHolder.HeaderTextView.setGravity(Gravity.CENTER);
                     viewHolder.HeaderTextView.setLayoutParams(linearParams);
                     break;
@@ -135,8 +135,8 @@ public class JpResultAdapter extends PanelAdapter {
                     HeaderImageViewLayoutParams.height=40;
                     viewHolder.HeaderImageView.setLayoutParams(HeaderImageViewLayoutParams);
                     LinearLayout.LayoutParams HeaderTextViewLayoutParams =  (LinearLayout.LayoutParams)viewHolder.HeaderTextView.getLayoutParams();
-                    HeaderTextViewLayoutParams.width =100;
-                    HeaderTextViewLayoutParams.height=90;
+                    HeaderTextViewLayoutParams.width =140;
+                    HeaderTextViewLayoutParams.height=120;
                     viewHolder.HeaderTextView.setGravity(Gravity.CENTER);
                     viewHolder.HeaderTextView.setLayoutParams(HeaderTextViewLayoutParams);
                     if(pos ==3){
@@ -177,8 +177,8 @@ public class JpResultAdapter extends PanelAdapter {
                     break;
                 default:
                     LinearLayout.LayoutParams linearParams2 =  (LinearLayout.LayoutParams)viewHolder.HeaderTextView.getLayoutParams();
-                    linearParams2.width =150;
-                    linearParams2.height=90;
+                    linearParams2.width =180;
+                    linearParams2.height=120;
                     viewHolder.HeaderTextView.setGravity(Gravity.CENTER);
                     viewHolder.HeaderTextView.setLayoutParams(linearParams2);
 //                    viewHolder.dateTextView.setPadding(30, 20, 30, 20);
@@ -233,8 +233,8 @@ public class JpResultAdapter extends PanelAdapter {
                 case 1:case 4:case 16: case 17:case 12: case 13:
 //                    viewHolder.dateTextView.setPadding(70, 20, 70, 20);
                     RelativeLayout.LayoutParams linearParams =  (RelativeLayout.LayoutParams)viewHolder.contentTextView.getLayoutParams();
-                    linearParams.width =250;
-                    linearParams.height=90;
+                    linearParams.width =300;
+                    linearParams.height=120;
                     viewHolder.contentTextView.setGravity(Gravity.CENTER);
                     viewHolder.contentTextView.setLayoutParams(linearParams);
                     break;
@@ -243,15 +243,15 @@ public class JpResultAdapter extends PanelAdapter {
                         viewHolder.contentTextView.setTextColor(Color.parseColor("#F44336"));
                     }
                     RelativeLayout.LayoutParams linearParams3 =  (RelativeLayout.LayoutParams)viewHolder.contentTextView.getLayoutParams();
-                    linearParams3.width =140;
-                    linearParams3.height=90;
+                    linearParams3.width =180;
+                    linearParams3.height=120;
                     viewHolder.contentTextView.setGravity(Gravity.CENTER);
                     viewHolder.contentTextView.setLayoutParams(linearParams3);
                     break;
                 default:
                     RelativeLayout.LayoutParams linearParams2 =  (RelativeLayout.LayoutParams)viewHolder.contentTextView.getLayoutParams();
-                    linearParams2.width =150;
-                    linearParams2.height=90;
+                    linearParams2.width =180;
+                    linearParams2.height=120;
                     viewHolder.contentTextView.setGravity(Gravity.CENTER);
                     viewHolder.contentTextView.setLayoutParams(linearParams2);
 //                    viewHolder.dateTextView.setPadding(30, 20, 30, 20);

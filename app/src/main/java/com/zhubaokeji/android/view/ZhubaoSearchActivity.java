@@ -349,7 +349,7 @@ public class ZhubaoSearchActivity extends BaseActivity {
 
     private void initData() {
         String [] shapeStr= new  String[]{"圆形","梨形","公主方","心形","马眼形","椭圆形","雷迪恩","祖母绿","垫形","三角形"};
-        String[] colorStr=new String[]{"D","E","F","G","H","DataHolder","J","K","L","M","N"};
+        String[] colorStr=new String[]{"D","E","F","G","H","I","J","K","L","M","N"};
         String[] clarityStr=new String[]{"FL","IF","VVS1","VVS2","VS1","VS2","SI1","SI2","SI3","I1"};
         String[] threeExStr=new String[]{"3EX","3VG","3GD","3FR"};
         String[] threeStr=new String[]{"EX","VG","GD","FG"};
