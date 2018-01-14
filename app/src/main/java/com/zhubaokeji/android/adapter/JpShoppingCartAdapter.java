@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.zhubaokeji.android.BR;
 import com.zhubaokeji.android.R;
 import com.zhubaokeji.android.bean.JpShoppingCartResponse;
 import com.zhubaokeji.android.listener.OnItemListener;
@@ -30,13 +31,13 @@ import butterknife.ButterKnife;
 
 public class JpShoppingCartAdapter extends BaseQuickAdapter<JpShoppingCartResponse,JpShoppingCartAdapter.ShoppingHolder> {
 
-    private Context mContext;
     private List<JpShoppingCartResponse> mDataList;
     private LayoutInflater mInflater;
     private OnItemListener mOnItemListener;
 
-    public JpShoppingCartAdapter(int layoutResId, @Nullable List<JpShoppingCartResponse> data) {
+    public JpShoppingCartAdapter(final int layoutResId, @Nullable List<JpShoppingCartResponse> data) {
         super(layoutResId, data);
+
         this.mDataList=data;
     }
 
@@ -45,7 +46,7 @@ public class JpShoppingCartAdapter extends BaseQuickAdapter<JpShoppingCartRespon
     }
 
     @Override
-    protected void convert(final ShoppingHolder helper, JpShoppingCartResponse item) {
+    protected void convert( final ShoppingHolder helper, JpShoppingCartResponse item) {
         final int position=helper.getLayoutPosition();
         helper.jpShoppingSaleback.setText(item.getSaleback());
         helper.jpShoppingSaleprice.setText(item.getSaleprice());
@@ -79,6 +80,8 @@ public class JpShoppingCartAdapter extends BaseQuickAdapter<JpShoppingCartRespon
             helper.offerSelect.setChecked(false);
         }
 
+
+
         helper.jpShoppingReportno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,21 +109,28 @@ public class JpShoppingCartAdapter extends BaseQuickAdapter<JpShoppingCartRespon
         });
     }
 
-
     @Override
-    protected View getItemView(int layoutResId, ViewGroup parent) {
-        ViewDataBinding binding = DataBindingUtil.inflate(mLayoutInflater, layoutResId, parent, false);
-        if (binding == null) {
-            return super.getItemView(layoutResId, parent);
-        }
-        View view = binding.getRoot();
-        return view;
+    protected ShoppingHolder onCreateDefViewHolder(ViewGroup parent, int viewType) {
+            return new ShoppingHolder(getItemView(R.layout.jp_shoppingcart_item, parent));
     }
 
-    public void remove(int itemModel) {
-        mDataList.remove(itemModel);
-    }
+//    @Override
+//    protected View getItemView(int layoutResId, ViewGroup parent) {
+//       View D= LayoutInflater.from(parent.getContext()).inflate(R.layout.jp_shoppingcart_item, parent, false);
+//
+////        ViewDataBinding binding = DataBindingUtil.inflate(mLayoutInflater, R.layout.jp_shoppingcart_item, parent, false);
+////        if (binding == null) {
+////            return super.getItemView(layoutResId, parent);
+////        }
+////        View view = binding.getRoot();
+//        return D;
+//    }
 
+
+
+//    public void remove(int itemModel) {
+//        mDataList.remove(itemModel);
+//    }
 
     public static class ShoppingHolder extends BaseViewHolder {
         @BindView(R.id.select)
@@ -150,7 +160,8 @@ public class JpShoppingCartAdapter extends BaseQuickAdapter<JpShoppingCartRespon
 
         public ShoppingHolder(View view) {
             super(view);
-            ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, view);
         }
     }
+
 }
