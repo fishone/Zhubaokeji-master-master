@@ -242,3 +242,7 @@ file=D:\AndroidTest\Zhubaokeji-master-master\app\build\outputs\mapping\release\m
 sha1=9ecea54b8536f9f0588f062c0a1d299e576c1a2c
 appId=e7b505a967
 
+file=E:\Android\Zhubaokeji-master-master\app\build\outputs\mapping\release\mapping.txt
+sha1=d83cf315d5a73d61953d3dffc22b9241cdd20b10
+appId=e7b505a967
+
