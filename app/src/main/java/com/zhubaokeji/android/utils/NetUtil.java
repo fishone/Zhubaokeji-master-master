@@ -145,13 +145,13 @@ public class NetUtil {
 		}
 		int nType = networkInfo.getType();
 
-		if (nType == ConnectivityManager.TYPE_MOBILE) {
+		if (networkInfo != null && nType == ConnectivityManager.TYPE_MOBILE ) {
 			if (networkInfo.getExtraInfo().toLowerCase(Locale.getDefault()).equals("cmnet")) {
 				return NetType.CMNET;
 			} else {
 				return NetType.CMWAP;
 			}
-		} else if (nType == ConnectivityManager.TYPE_WIFI) {
+		} else if (networkInfo != null && nType == ConnectivityManager.TYPE_WIFI) {
 			return NetType.WIFI;
 		}
 		return NetType.NONE;

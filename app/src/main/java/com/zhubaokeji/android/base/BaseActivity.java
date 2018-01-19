@@ -83,7 +83,6 @@ public abstract class  BaseActivity extends AppCompatActivity  {
 
 
     public static void initImageLoader(Context context) {
-
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
                 context).threadPriority(Thread.NORM_PRIORITY - 2)
                 .denyCacheImageMultipleSizesInMemory()

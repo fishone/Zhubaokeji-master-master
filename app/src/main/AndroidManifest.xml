@@ -23,15 +23,6 @@
         android:supportsRtl="true"
         android:name=".SampleApplication"
         android:theme="@style/AppTheme">
-        <activity android:name="com.zhubaokeji.android.base.BaseActivity"></activity>
-        <receiver android:name="com.zhubaokeji.android.utils.NetBroadcastReceiver" >
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-                <action android:name="android.net.wifi.STATE_CHANGE" />
-            </intent-filter>
-        </receiver>
         <activity android:name="com.zhubaokeji.android.view.SplashActivity"
             >
             <intent-filter>
@@ -42,7 +33,6 @@
         <activity android:name="com.zhubaokeji.android.view.MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
-
         </activity>
         <activity android:name="com.zhubaokeji.android.view.ZhubaoLoginActivity"
             android:screenOrientation="portrait">
