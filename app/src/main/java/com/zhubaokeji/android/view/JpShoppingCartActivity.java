@@ -94,7 +94,7 @@ public class JpShoppingCartActivity extends BaseActivity {
     private boolean isShow;
     private boolean isSelectAll;
     //记录选择的Item
-    private HashSet<Integer> positionSet;
+    private HashSet<Integer> positionSet = new HashSet<>();;
     private int flag = 0;
     private BigDecimal totalPrice;// 购买的商品总价
     private BigDecimal bigOfferPrice; //优惠商品的总价
@@ -306,7 +306,6 @@ public class JpShoppingCartActivity extends BaseActivity {
     }
 
     private void setListener() {
-        positionSet = new HashSet<>();
         if (positionSet.size() == 0) {
             jpShoppingCheckAll.setChecked(false);
         }
@@ -460,8 +459,10 @@ public class JpShoppingCartActivity extends BaseActivity {
                 break;
             case R.id.jp_shopping_checkAll:
                 for (int i = 0; i < responseList.size(); i++) {
+                    positionSet.add(i);
                     responseList.get(i).setSelect(jpShoppingCheckAll.isChecked());
                     if (!jpShoppingCheckAll.isChecked()) {
+                        positionSet=new HashSet<>();
                         if (responseList.get(i).isOfferSelect()) {
                             offerCompute(i, false);
                         }
@@ -644,6 +645,10 @@ public class JpShoppingCartActivity extends BaseActivity {
                                 String message =lzyResponse.message;
                                 switch (lzyResponse.status) {
                                     case 1:
+                                        offerCalculate();
+                                        calculate();
+                                        setListener();
+                                        break;
                                     case -1:
                                     case 0:
                                         //GSON直接解析成对象
@@ -734,11 +739,11 @@ public class JpShoppingCartActivity extends BaseActivity {
             int direction = menuBridge.getDirection(); // 左侧还是右侧菜单。
             int adapterPosition = menuBridge.getAdapterPosition(); // RecyclerView的Item的position。
             int menuPosition = menuBridge.getPosition(); // 菜单在RecyclerView的Item中的Position。
-
             if (menuPosition == 0) {// 删除按钮被点击。
-                responseList.remove(adapterPosition);
-                jpShoppingCartAdapter.notifyItemRemoved(adapterPosition);
                 final String recnoStr = responseList.get(adapterPosition).getRecno();
+                responseList.remove(adapterPosition);
+                positionSet.remove(adapterPosition);
+                jpShoppingCartAdapter.notifyItemRemoved(adapterPosition);
                 final String path = Urls.URL + Urls.JPSHOPPINGCARTDELECT + "&token=" + jpUserInfo.getToken() + "&ids=" + recnoStr;
                 OkGo.<LzyResponse>get(path)     // 请求方式和请求url
                         .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
@@ -751,6 +756,9 @@ public class JpShoppingCartActivity extends BaseActivity {
                                         String message = lzyResponse.message;
                                         switch (lzyResponse.status) {
                                             case 1:
+                                                offerCalculate();
+                                                calculate();
+                                                setListener();
                                                 break;
                                             case -1:
                                             case 0:

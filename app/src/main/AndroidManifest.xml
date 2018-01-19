@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:name=".SampleApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".base.BaseActivity"></activity>
+        <activity android:name="com.zhubaokeji.android.base.BaseActivity"></activity>
         <receiver android:name="com.zhubaokeji.android.utils.NetBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -33,7 +33,7 @@
             </intent-filter>
         </receiver>
         <activity android:name="com.zhubaokeji.android.view.SplashActivity"
-            android:screenOrientation="portrait">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
