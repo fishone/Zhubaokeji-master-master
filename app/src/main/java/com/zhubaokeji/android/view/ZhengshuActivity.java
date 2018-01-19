@@ -102,7 +102,6 @@ public class ZhengshuActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
         titleBar.setTitle("证书查询");

@@ -166,7 +166,6 @@ public class ZhubaoColorSearchActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -193,7 +192,7 @@ public class ZhubaoColorSearchActivity extends BaseActivity {
         if(type== NetUtil.NetType.NONE){
             zhubao_Login_boolean=false;
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
+
         }
     }
 
@@ -303,7 +302,6 @@ public class ZhubaoColorSearchActivity extends BaseActivity {
     private void query(final JpSearchRequest request) {
         if(NetUtil.isZhubaoQuery(mContext) ==false){
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
             return;
         }
         final String path = Urls.ZHUBAOURL+ Urls.ZHUBAOSEARCHURL +request.toJson();
@@ -326,14 +324,12 @@ public class ZhubaoColorSearchActivity extends BaseActivity {
                                             result_intent.putParcelableArrayListExtra("list", colorResponsesList);
                                             result_intent.putExtra("request", request);
                                             startActivity(result_intent);
-                                            overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                                         }
                                         break;
                                     case -1:
                                         zhubao_Login_boolean = false;
                                         ToastUtil.show(getApplicationContext(),"登录超时,请重新登录");
                                         startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-                                        mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
                                         break;
                                     default:
                                         ToastUtil.show( mContext,"查询失败,请重试");

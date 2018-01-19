@@ -100,7 +100,6 @@ public class JpOrderActivity extends BaseActivity {
                 result_intent.setClass(JpOrderActivity.this, JpOrderResultActivity.class);
                 result_intent.putExtra("jpOrderRequest", jpOrderRequest);
                 startActivity(result_intent);
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 return false;
             }
 
@@ -123,7 +122,6 @@ public class JpOrderActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
         mCollectView = (ImageView) titleBar.addAction(new TitleBar.ImageAction(R.drawable.ic_action_action_search) {

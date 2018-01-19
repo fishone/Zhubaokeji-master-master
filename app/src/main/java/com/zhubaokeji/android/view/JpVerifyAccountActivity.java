@@ -60,7 +60,6 @@ public class JpVerifyAccountActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
             }
         });
     }
@@ -107,7 +106,6 @@ public class JpVerifyAccountActivity extends BaseActivity {
                                         if(jpUserInfo !=null){
                                             Intent result_intent = new Intent();
                                             result_intent.setClass(JpVerifyAccountActivity.this, JpModifyPasswordActivity.class);
-                                            overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                                             result_intent.putExtra("jpUserInfo", jpUserInfo);
                                             startActivity(result_intent);
                                         }

@@ -145,7 +145,6 @@ public class CalculatorActivity extends BaseActivity implements TextWatcher {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
         mContext=this;

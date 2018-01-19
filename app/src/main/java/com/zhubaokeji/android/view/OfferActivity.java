@@ -74,7 +74,6 @@ public class OfferActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 

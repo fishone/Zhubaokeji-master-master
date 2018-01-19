@@ -75,7 +75,6 @@ public class JpBulletinActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
             }
         });
         mContext=this;

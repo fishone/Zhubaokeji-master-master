@@ -158,7 +158,6 @@ public class JpLoginActivity extends BaseActivity {
                                             preferencesUtil.saveJpUserInfo(user);
                                             Intent login_intent = new Intent();
                                             login_intent.setClass(JpLoginActivity.this, MainActivity.class);
-                                            overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                                             login_intent.putExtra("BottomNavigationBar", "1");
                                             startActivity(login_intent);
                                         }
@@ -212,7 +211,6 @@ public class JpLoginActivity extends BaseActivity {
             case R.id.jp_retrievePassword:
                 Intent result_intent = new Intent();
                 result_intent.setClass(JpLoginActivity.this, JpVerifyAccountActivity.class);
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 startActivity(result_intent);
                 break;
             case R.id.setting_network:case R.id.relative_Tips:

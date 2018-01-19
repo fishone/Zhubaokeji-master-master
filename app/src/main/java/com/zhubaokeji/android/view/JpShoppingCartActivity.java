@@ -130,7 +130,6 @@ public class JpShoppingCartActivity extends BaseActivity {
                 Intent intent = new Intent();
                 setResult(responseList.size(), intent);
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
         titleBar.addAction(new TitleBar.TextAction("删除") {
@@ -346,7 +345,6 @@ public class JpShoppingCartActivity extends BaseActivity {
                 if (jpShoppingCartResponse !=null) {
                     Intent result_intent = new Intent();
                     result_intent.setClass(JpShoppingCartActivity.this, ZhengshuActivity.class);
-                    overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                     result_intent.putExtra("reportNo", jpShoppingCartResponse.getReportno());
                     result_intent.putExtra("reportType", jpShoppingCartResponse.getReport());
                     startActivity(result_intent);
@@ -526,7 +524,6 @@ public class JpShoppingCartActivity extends BaseActivity {
             public void onClick(ColorDialog dialog) {
                 startActivity(new Intent(context, JpOrderActivity.class));
                 dialog.dismiss();
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
             }
         })
                 .setNegativeListener("留在此页", new ColorDialog.OnNegativeListener() {

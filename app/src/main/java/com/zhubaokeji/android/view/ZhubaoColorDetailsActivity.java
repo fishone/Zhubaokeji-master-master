@@ -91,7 +91,6 @@ public class ZhubaoColorDetailsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -114,7 +113,6 @@ public class ZhubaoColorDetailsActivity extends BaseActivity {
         if(type== NetUtil.NetType.NONE){
             zhubao_Login_boolean=false;
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
         }
     }
 
@@ -127,7 +125,6 @@ public class ZhubaoColorDetailsActivity extends BaseActivity {
                 diamondResponse.setRmbprice(zbColorRmbprice.getText().toString());
                 Intent_Result.putExtra("colorOfferInfo", diamondResponse);
                 startActivity(Intent_Result);
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 break;
             case R.id.color_details_reportNo:
                 Intent_Result = new Intent();
@@ -135,7 +132,6 @@ public class ZhubaoColorDetailsActivity extends BaseActivity {
                 Intent_Result.putExtra("reportNo", diamondResponse.getReportno());
                 Intent_Result.putExtra("reportType", diamondResponse.getReport());
                 startActivity(Intent_Result);
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 break;
         }
     }

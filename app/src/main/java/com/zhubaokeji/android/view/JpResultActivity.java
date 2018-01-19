@@ -99,7 +99,6 @@ public class JpResultActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -293,7 +292,6 @@ public class JpResultActivity extends BaseActivity {
                 Intent_Result.putExtra("detailsDiamond", zhubaoDiamondResponse);
                 Intent_Result.putExtra("diamondRequest",diamondRequest);
                 startActivityForResult(Intent_Result, 2);
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
 //                JpResultActivity.this.startActivity(Intent_Result);
             }
 
@@ -331,7 +329,6 @@ public class JpResultActivity extends BaseActivity {
         Intent result_intent = new Intent();
         result_intent.setClass(JpResultActivity.this, JpShoppingCartActivity.class);
         startActivityForResult(result_intent, RESULTCODE);
-        overridePendingTransition(R.anim.in_left, R.anim.out_lef);
     }
 
     @Override

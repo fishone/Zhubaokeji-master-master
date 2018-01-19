@@ -88,13 +88,11 @@ public class JpUserInfoActivity extends BaseActivity{
         switch (view.getId()) {
             case R.id.re_Company:
                 startActivity(new Intent(JpUserInfoActivity.this, CompanyActivity.class));
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 break;
             case R.id.re_dropOut:
                 jp_Login_Boolean = false;
                 Intent loginOut_intent = new Intent();
                 loginOut_intent.setClass(JpUserInfoActivity.this, MainActivity.class);
-                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
                 loginOut_intent.putExtra("BottomNavigationBar","1");
                 startActivity(loginOut_intent);
                 JpUser user = new JpUser();
@@ -109,7 +107,6 @@ public class JpUserInfoActivity extends BaseActivity{
                 break;
             case R.id.re_intercalate:
                 startActivity(new Intent(JpUserInfoActivity.this, BasicSettingsActivity.class));
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 break;
         }
     }

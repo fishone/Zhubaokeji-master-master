@@ -149,7 +149,6 @@ public class ZhubaoSearchActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
         titleBar.setActionTextColor(Color.WHITE);
@@ -184,7 +183,6 @@ public class ZhubaoSearchActivity extends BaseActivity {
         if(type== NetUtil.NetType.NONE){
             zhubao_Login_boolean=false;
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
         }
     }
 
@@ -315,7 +313,6 @@ public class ZhubaoSearchActivity extends BaseActivity {
                                             Logger.d(responseList.size());
                                             result_intent.putExtra("request", request);
                                             startActivity(result_intent);
-                                            overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                                         }else {
                                             ToastUtil.show(mContext,"没有查询到钻石");
                                         }
@@ -324,7 +321,6 @@ public class ZhubaoSearchActivity extends BaseActivity {
                                         zhubao_Login_boolean = false;
                                         ToastUtil.show(mContext,"登录超时,请重新登录");
                                         startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-                                        overridePendingTransition(R.anim.in_left, R.anim.in_left);
                                         break;
                                     default:
                                         ToastUtil.show(mContext,"查询失败,请重试");

@@ -97,7 +97,6 @@ public class ZhubaoLoginActivity extends BaseActivity {
                 }else {
                     startActivity(new Intent(v.getContext(), MainActivity.class));
                 }
-                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
             }
         });
 
@@ -167,7 +166,6 @@ public class ZhubaoLoginActivity extends BaseActivity {
                                             preferencesUtil.saveZhubaoUserInfo(user);
                                             Intent login_intent = new Intent();
                                             login_intent.setClass(ZhubaoLoginActivity.this, MainActivity.class);
-                                            overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                                             startActivity(login_intent);
                                             ToastUtil.show(ZhubaoLoginActivity.this, "登录成功");
                                         }

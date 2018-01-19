@@ -93,7 +93,6 @@ public class ZhubaoRegisterActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -172,7 +171,6 @@ public class ZhubaoRegisterActivity extends BaseActivity implements View.OnClick
                                         ToastUtil.show(mContext,message);
                                         Intent login_intent = new Intent();
                                         login_intent.setClass(ZhubaoRegisterActivity.this, MainActivity.class);
-                                        overridePendingTransition(R.anim.in_right, R.anim.out_lef);
                                         startActivity(login_intent);
                                         break;
                                    default:

@@ -316,7 +316,6 @@ public class JpHomeFragment extends Fragment {
                     case 0:
                          if (jp_Login_Boolean) {
                             startActivity(new Intent(view.getContext(), JpSearchActivity.class));
-                            ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                             break;
                         } else {
                             alertDialog(view);
@@ -325,7 +324,6 @@ public class JpHomeFragment extends Fragment {
                     case 1:
                         if (jp_Login_Boolean) {
                             startActivity(new Intent(view.getContext(), JpOrderActivity.class));
-                            ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                             break;
                         } else {
                             alertDialog(view);
@@ -336,7 +334,6 @@ public class JpHomeFragment extends Fragment {
                             Intent result_intent = new Intent();
                             result_intent.setClass(view.getContext(), JpShoppingCartActivity.class);
                             startActivityForResult(result_intent, 2);
-                            ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                             break;
                         } else {
                             alertDialog(view);
@@ -344,7 +341,6 @@ public class JpHomeFragment extends Fragment {
                         break;
                     case 3:
                         startActivity(new Intent(view.getContext(), JpBulletinActivity.class));
-                        ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                         break;
                 }
             }
@@ -374,7 +370,6 @@ public class JpHomeFragment extends Fragment {
             @Override
             public void onClick(ColorDialog dialog) {
                 startActivity(new Intent(dialog.getContext(), JpLoginActivity.class));
-                ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 dialog.dismiss();
             }
         })

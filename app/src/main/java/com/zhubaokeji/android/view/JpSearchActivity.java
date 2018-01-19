@@ -136,7 +136,6 @@ public class JpSearchActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -200,7 +199,6 @@ public class JpSearchActivity extends BaseActivity {
                                                     Logger.d(responseList.size());
                                                     result_intent.putExtra("request", jpSearchRequest);
                                                     startActivity(result_intent);
-                                                    overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                                                 }
                                                 break;
                                             case -404: case 404:
@@ -528,7 +526,6 @@ public class JpSearchActivity extends BaseActivity {
     private void condition() {
         if(NetUtil.isJpQuery(mContext) !=true){
             startActivity(new Intent(mContext, JpLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.out_lef);
             return;
         }
         if (jpSearchHk.isSelected() == true && jpSearchInd.isSelected() == true) {

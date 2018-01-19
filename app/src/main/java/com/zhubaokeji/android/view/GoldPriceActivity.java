@@ -78,7 +78,6 @@ public class GoldPriceActivity extends BaseActivity {
             public void onClick(View v) {
                 finish();
                 timer.cancel();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
         mContext=this;

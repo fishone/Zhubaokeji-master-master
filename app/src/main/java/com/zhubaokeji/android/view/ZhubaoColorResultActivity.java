@@ -80,7 +80,6 @@ public class ZhubaoColorResultActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -144,7 +143,6 @@ public class ZhubaoColorResultActivity extends BaseActivity {
                 Intent_Result.putExtra("diamondRequest", diamondRequest);
                 scrollablePanel.notifyDataSetChanged();
                 startActivity(Intent_Result);
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
             }
 
             @Override
@@ -178,7 +176,6 @@ public class ZhubaoColorResultActivity extends BaseActivity {
         if(type== NetUtil.NetType.NONE){
             zhubao_Login_boolean=false;
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
         }
     }
 
@@ -225,7 +222,6 @@ public class ZhubaoColorResultActivity extends BaseActivity {
                                         zhubao_Login_boolean = false;
                                         ToastUtil.show(getApplicationContext(),"登录超时,请重新登录");
                                         startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-                                        mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
                                         break;
                                     default:
                                         Toast toast = Toast.makeText(mContext, "查询失败,请重试", Toast.LENGTH_SHORT);

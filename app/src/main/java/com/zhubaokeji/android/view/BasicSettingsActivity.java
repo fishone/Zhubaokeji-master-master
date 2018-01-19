@@ -66,7 +66,6 @@ public class BasicSettingsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -106,7 +105,6 @@ public class BasicSettingsActivity extends BaseActivity {
                 basicSetting.setPercentage(settingPercentage.getText().toString());
                 preferencesUtil.saveBasicSetting(basicSetting);
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
                 ToastUtil.show(mContext,"设置成功");
                 break;
         }

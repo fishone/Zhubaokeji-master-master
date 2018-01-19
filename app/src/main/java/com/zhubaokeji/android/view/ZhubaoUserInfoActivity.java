@@ -74,7 +74,7 @@ public class ZhubaoUserInfoActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
             }
         });
 
@@ -108,12 +108,10 @@ public class ZhubaoUserInfoActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.re_Company:
                 startActivity(new Intent(ZhubaoUserInfoActivity.this, CompanyActivity.class));
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 break;
             case R.id.re_dropOut:
                 zhubao_Login_boolean = false;
                 startActivity(new Intent(ZhubaoUserInfoActivity.this, MainActivity.class));
-                overridePendingTransition(R.anim.in_right, R.anim.out_lef);
                 JpUser user = new JpUser();
                 preferencesUtil=new SharedPreferencesUtil(getApplicationContext());
 
@@ -127,7 +125,6 @@ public class ZhubaoUserInfoActivity extends BaseActivity {
                 break;
             case R.id.re_intercalate:
                 startActivity(new Intent(ZhubaoUserInfoActivity.this, BasicSettingsActivity.class));
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 break;
         }
     }

@@ -168,7 +168,6 @@ public class JpModifyPasswordActivity extends BaseActivity {
                                             case 1:
                                                 Intent result_intent = new Intent();
                                                 result_intent.setClass(JpModifyPasswordActivity.this, JpLoginActivity.class);
-                                                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                                                 startActivity(result_intent);
                                                 ToastUtil.show(mContext,message);
                                                 break;

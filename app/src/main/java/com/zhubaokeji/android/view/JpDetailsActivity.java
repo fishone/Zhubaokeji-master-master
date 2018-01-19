@@ -121,7 +121,6 @@ public class JpDetailsActivity extends BaseActivity {
                 //setResult(resultCode, data);第一个参数表示结果返回码，一般只要大于1就可以，但是
                 setResult(2, intent);
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -243,7 +242,6 @@ public class JpDetailsActivity extends BaseActivity {
                     result_intent.putExtra("reportNo", diamondResponse.getReportno());
                     result_intent.putExtra("reportType", diamondResponse.getReport());
                     startActivity(result_intent);
-                    overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 }
                 break;
             case R.id.addShoppingCart:
@@ -271,7 +269,6 @@ public class JpDetailsActivity extends BaseActivity {
                                                 Intent login_intent = new Intent();
                                                 login_intent.setClass(JpDetailsActivity.this, JpLoginActivity.class);
                                                 startActivity(login_intent);
-                                                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                                                 break;
                                             default:
                                                 ToastUtil.show(mContext, message);

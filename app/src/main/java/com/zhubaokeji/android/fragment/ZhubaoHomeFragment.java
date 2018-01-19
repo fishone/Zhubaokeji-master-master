@@ -163,7 +163,6 @@ public class ZhubaoHomeFragment extends Fragment {
                     case 0:
                      if (zhubao_Login_boolean) {
                             startActivity(new Intent(v.getContext(), ZhubaoSearchActivity.class));
-                            ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                             break;
                      }else {
                             alertDialog(v);
@@ -172,26 +171,21 @@ public class ZhubaoHomeFragment extends Fragment {
                     case 1:
                        if (zhubao_Login_boolean) {
                             startActivity(new Intent(v.getContext(), ZhubaoColorSearchActivity.class));
-                            ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                         } else {
                             alertDialog(v);
                         }
                         break;
                     case 2:
                         startActivity(new Intent(v.getContext(), ZhengshuActivity.class));
-                        ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.in_left);
                         break;
                     case 3:
                         startActivity(new Intent(v.getContext(), CalculatorActivity.class));
-                        ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.in_left);
                         break;
                     case 4:
                         startActivity(new Intent(v.getContext(), GoldPriceActivity.class));
-                        ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.in_left);
                         break;
                     case 5:
                         startActivity(new Intent(v.getContext(), OnlinepriceTableActivity.class));
-                        ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.in_left);
                         break;
 //                    case 6:
 //                            startActivity(new Intent(v.getContext(), GG.class));
@@ -299,7 +293,6 @@ public class ZhubaoHomeFragment extends Fragment {
             public void onClick(ColorDialog dialog) {
                 dialog.dismiss();
                 startActivity(new Intent(dialog.getContext(), ZhubaoLoginActivity.class));
-                ((Activity) getContext()).overridePendingTransition(R.anim.in_left, R.anim.out_lef);
             }
         })
                 .setNegativeListener("取消", new ColorDialog.OnNegativeListener() {

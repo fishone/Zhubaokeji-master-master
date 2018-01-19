@@ -82,7 +82,6 @@ public class ZhubaoResultActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -191,7 +190,6 @@ public class ZhubaoResultActivity extends BaseActivity {
                 Intent_Result.putExtra("diamondRequest", diamondRequest);
                 scrollablePanel.notifyDataSetChanged();
                 startActivity(Intent_Result);
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
             }
 
             @Override
@@ -225,7 +223,6 @@ public class ZhubaoResultActivity extends BaseActivity {
                     result_intent.setClass(ZhubaoResultActivity.this, PictureActity.class);
                     result_intent.putExtra("url", zhubaoDiamondResponse.getImgurl());
                     startActivity(result_intent);
-                    overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 }
             }
         });
@@ -236,7 +233,6 @@ public class ZhubaoResultActivity extends BaseActivity {
         if(type== NetUtil.NetType.NONE){
             zhubao_Login_boolean=false;
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
         }
     }
 
@@ -250,7 +246,6 @@ public class ZhubaoResultActivity extends BaseActivity {
     private void PullingUp(final int freshen) {
         if(NetUtil.isZhubaoQuery(mContext) ==false){
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
             return;
         }
         final String path = Urls.ZHUBAOURL + Urls.ZHUBAOSEARCHURL + diamondRequest.toJson();
@@ -286,7 +281,6 @@ public class ZhubaoResultActivity extends BaseActivity {
                                         zhubao_Login_boolean = false;
                                         ToastUtil.show(getApplicationContext(), "登录超时,请重新登录");
                                         startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-                                        mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
                                         break;
                                     default:
                                         ToastUtil.show(mContext,message);

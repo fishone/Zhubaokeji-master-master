@@ -102,7 +102,6 @@ public class ZhubaoDetailsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.in_right, R.anim.out_right);
             }
         });
 
@@ -130,7 +129,6 @@ public class ZhubaoDetailsActivity extends BaseActivity {
         if(type== NetUtil.NetType.NONE){
             zhubao_Login_boolean=false;
             startActivity(new Intent(mContext, ZhubaoLoginActivity.class));
-            mContext.overridePendingTransition(R.anim.in_left, R.anim.in_left);
         }
     }
 
@@ -210,7 +208,6 @@ public class ZhubaoDetailsActivity extends BaseActivity {
             case R.id.offer:
                 Intent Intent_Result = new Intent();
                 Intent_Result.setClass(this, OfferActivity.class);
-                overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                 diamondResponse.setPresellBack(presellBack.getText().toString());
                 diamondResponse.setRmbprice(rmbprice.getText().toString());
                 Intent_Result.putExtra("offerInfo", diamondResponse);
@@ -220,7 +217,6 @@ public class ZhubaoDetailsActivity extends BaseActivity {
                 if (!zbDetailsReport.getText().equals("")) {
                     Intent result_intent = new Intent();
                     result_intent.setClass(ZhubaoDetailsActivity.this, ZhengshuActivity.class);
-                    overridePendingTransition(R.anim.in_left, R.anim.out_lef);
                     result_intent.putExtra("reportNo", diamondResponse.getReportno());
                     result_intent.putExtra("reportType", diamondResponse.getReport());
                     startActivity(result_intent);
