@@ -80,6 +80,7 @@ public class JpUserInfoActivity extends BaseActivity{
         if(type== NetUtil.NetType.NONE){
             jp_Login_Boolean = false;
             ToastUtil.show(mContext,"网络未连接,请连接网络");
+            startActivity(new Intent(mContext, JpLoginActivity.class));
         }
     }
 

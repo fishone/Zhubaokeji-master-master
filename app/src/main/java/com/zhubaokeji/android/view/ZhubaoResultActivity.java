@@ -159,7 +159,7 @@ public class ZhubaoResultActivity extends BaseActivity {
                                                     zhubao_Login_boolean=false;
                                                     ToastUtil.show(getApplicationContext(),"登录超时,请重新登录");
                                                     Intent login_intent = new Intent();
-                                                    login_intent.setClass(ZhubaoResultActivity.this, JpLoginActivity.class);
+                                                    login_intent.setClass(ZhubaoResultActivity.this, ZhubaoLoginActivity.class);
                                                     startActivity(login_intent);
                                                     break;
                                                 default:
@@ -173,6 +173,7 @@ public class ZhubaoResultActivity extends BaseActivity {
                                 }
                                 @Override
                                 public void onError(Response<LzyResponse> response) {
+                                    dialog.close();
                                     //网络请求失败的回调,一般会弹个Toast
                                     NetUtil.myException(mContext,response.getException(), FlagUtil.ZHUBAOKEJI);
                                 }
@@ -293,6 +294,7 @@ public class ZhubaoResultActivity extends BaseActivity {
                     }
                     @Override
                     public void onError(Response<LzyListResponse<ArrayList<ZhubaoDiamondResponse>>> response) {
+                        dialog.close();
                         //网络请求失败的回调,一般会弹个Toast
                         NetUtil.myException(mContext,response.getException(),FlagUtil.ZHUBAOKEJI);
                     }

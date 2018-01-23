@@ -146,6 +146,7 @@ public class JpResultActivity extends BaseActivity {
         if(type== NetUtil.NetType.NONE){
             jp_Login_Boolean = false;
             ToastUtil.show(mContext,"网络未连接,请连接网络");
+            startActivity(new Intent(mContext, JpLoginActivity.class));
         }
     }
 
@@ -205,6 +206,7 @@ public class JpResultActivity extends BaseActivity {
                     }
                     @Override
                     public void onError(Response<LzyListResponse<ArrayList<ZhubaoDiamondResponse>>> response) {
+                        dialog.close();
                         //网络请求失败的回调,一般会弹个Toast
                         NetUtil.myException(mContext,response.getException(), FlagUtil.JP);
                     }
@@ -275,6 +277,7 @@ public class JpResultActivity extends BaseActivity {
                                 }
                                 @Override
                                 public void onError(Response<LzyResponse> response) {
+                                    dialog.close();
                                     //网络请求失败的回调,一般会弹个Toast
                                     NetUtil.myException(mContext,response.getException(),FlagUtil.JP);
                                 }

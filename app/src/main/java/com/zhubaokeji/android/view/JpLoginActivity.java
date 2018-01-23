@@ -160,6 +160,7 @@ public class JpLoginActivity extends BaseActivity {
                                             login_intent.setClass(JpLoginActivity.this, MainActivity.class);
                                             login_intent.putExtra("BottomNavigationBar", "1");
                                             startActivity(login_intent);
+                                            ToastUtil.show(JpLoginActivity.this, "登录成功");
                                         }
                                         break;
                                     default:
@@ -175,6 +176,7 @@ public class JpLoginActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyResponse<JpUserInfo>> response) {
                         //网络请求失败的回调,一般会弹个Toast
+                        dialog.close();
                         Throwable throwable=response.getException();
                         if(throwable !=null)throwable.printStackTrace();
                         if(throwable instanceof UnknownHostException ||throwable instanceof ConnectException){
@@ -184,7 +186,6 @@ public class JpLoginActivity extends BaseActivity {
                         }else {
                             ToastUtil.show(mContext, "登录失败");
                         }
-                        dialog.close();
                     }
                 });
 

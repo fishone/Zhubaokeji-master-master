@@ -187,7 +187,16 @@ public class ZhubaoLoginActivity extends BaseActivity {
                     @Override
                     public void onError(Response<LzyResponse<JpUserInfo>> response) {
                         //网络请求失败的回调,一般会弹个Toast
-                        NetUtil.myException(mContext,response.getException(), FlagUtil.ZHUBAOKEJI);
+                        dialog.close();
+                        Throwable throwable=response.getException();
+                        if(throwable !=null)throwable.printStackTrace();
+                        if(throwable instanceof UnknownHostException ||throwable instanceof ConnectException){
+                            ToastUtil.show(mContext,"网络未连接,请连接网络");
+                        }else if(throwable instanceof SocketTimeoutException){
+                            ToastUtil.show(mContext,"网络请求超时");
+                        }else {
+                            ToastUtil.show(mContext, "登录失败");
+                        }
                     }
                 });
     }

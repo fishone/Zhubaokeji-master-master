@@ -242,7 +242,7 @@ public class JpHomeFragment extends Fragment {
                     .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
                     .execute(new JsonCallback<LzyListResponse<ArrayList<JpShoppingCartResponse>>>() {
                         @Override
-                        public void onSuccess(com.lzy.okgo.model.Response<LzyListResponse<ArrayList<JpShoppingCartResponse>>> response) {
+                        public void onSuccess(Response<LzyListResponse<ArrayList<JpShoppingCartResponse>>> response) {
                             try {
                                 if (null != response && null !=response.body()) {
                                     LzyListResponse<ArrayList<JpShoppingCartResponse>> lzyResponse=response.body();

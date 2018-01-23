@@ -240,10 +240,9 @@ public class NetUtil {
 		else {
 			ToastUtil.show(context,"操作失败，请重试");
 		}
-		if(NetUtil.isZhubaoQuery(context) ==false &&flag.equals("ZB")){
+		if(NetUtil.isZhubaoQuery(context) == false && flag.equals("ZB")){
 			context.startActivity(new Intent(context, ZhubaoLoginActivity.class));
-			return;
-		}else if(NetUtil.isJpQuery(context) ==false && flag.equals("JP")){
+		}else if(NetUtil.isJpQuery(context) == false && flag.equals("JP")){
 			context.startActivity(new Intent(context, JpLoginActivity.class));
 		}
 	}

@@ -184,6 +184,7 @@ public class ZhubaoRegisterActivity extends BaseActivity implements View.OnClick
                     }
                     @Override
                     public void onError(Response <LzyResponse> response) {
+                        dialog.close();
                         //网络请求失败的回调,一般会弹个Toast
                         NetUtil.myException(mContext,response.getException(), FlagUtil.ZHUBAOKEJI);
                     }

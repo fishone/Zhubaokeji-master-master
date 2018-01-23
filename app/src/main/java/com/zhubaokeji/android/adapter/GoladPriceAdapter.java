@@ -41,7 +41,7 @@ public class GoladPriceAdapter extends PanelAdapter {
     private void setContentView(int row, int column, HeaderViewHolder holder) {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) holder.item.getLayoutParams();
         params.width=width;
-        params.height=150;
+        params.height=250;
         holder.item.setLayoutParams(params);
         holder.item.setGravity(Gravity.CENTER);
         final goldResponse orderInfo = itemList.get(row);
