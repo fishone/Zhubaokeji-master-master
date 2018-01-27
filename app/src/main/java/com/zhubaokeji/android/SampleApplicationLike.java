@@ -1,6 +1,7 @@
 package com.zhubaokeji.android;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
@@ -38,6 +40,7 @@ import okhttp3.OkHttpClient;
 public class SampleApplicationLike extends DefaultApplicationLike {
     public static final String TAG = "Tinker.SampleApplicationLike";
     private static String TAGS = "MyLogger";
+    private Activity mContext;
     public SampleApplicationLike(Application application, int tinkerFlags,
                                  boolean tinkerLoadVerifyFlag, long applicationStartElapsedTime,
                                  long applicationStartMillisTime, Intent tinkerResultIntent) {
@@ -61,6 +64,9 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         Utils.init(getApplication());
           /*开启网络广播监听*/
         NetBroadcastReceiver.registerNetworkStateReceiver(getApplication());
+
+        //检测内存泄露
+        LeakCanary.install(getApplication());
     }
     private void initOkGo() {
         //---------这里给出的是示例代码,告诉你可以这么传,实际使用的时候,根据需要传,不需要就不传-------------//

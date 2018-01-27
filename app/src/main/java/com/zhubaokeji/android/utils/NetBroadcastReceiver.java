@@ -33,7 +33,7 @@ public  class NetBroadcastReceiver extends BroadcastReceiver {
 
     private static boolean isNetAvailable = false;
     private static NetUtil.NetType mNetType;
-    private static ArrayList<NetEvevt> mNetChangeObservers = new ArrayList<NetEvevt>();
+    private static ArrayList<NetEvevt> mNetChangeObservers;
     private static BroadcastReceiver mBroadcastReceiver;
 
     private static BroadcastReceiver getReceiver() {
@@ -63,6 +63,7 @@ public  class NetBroadcastReceiver extends BroadcastReceiver {
             notifyObserver();
         }
     }
+
 
     /**
      * 注册

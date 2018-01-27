@@ -185,7 +185,13 @@ dependencies {
 
     //一个强大的RecyclerAdapter框架
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+
+    //内存泄露检测
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
+
+
 bugly {
     debug = false
 }
