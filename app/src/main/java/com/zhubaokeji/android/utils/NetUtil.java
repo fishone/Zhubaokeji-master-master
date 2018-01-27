@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
 
+import com.blankj.utilcode.util.*;
 import com.lzy.okgo.exception.HttpException;
 import com.lzy.okgo.exception.StorageException;
 import com.orhanobut.logger.Logger;
@@ -146,10 +147,13 @@ public class NetUtil {
 		int nType = networkInfo.getType();
 
 		if (networkInfo != null && nType == ConnectivityManager.TYPE_MOBILE ) {
-			if (networkInfo.getExtraInfo().toLowerCase(Locale.getDefault()).equals("cmnet")) {
-				return NetType.CMNET;
-			} else {
-				return NetType.CMWAP;
+			String extraInfo=networkInfo.getExtraInfo();
+			if(!StringUtils.isEmpty(extraInfo)){
+				if (extraInfo.toLowerCase(Locale.getDefault()).equals("cmnet")) {
+					return NetType.CMNET;
+				} else {
+					return NetType.CMWAP;
+				}
 			}
 		} else if (networkInfo != null && nType == ConnectivityManager.TYPE_WIFI) {
 			return NetType.WIFI;

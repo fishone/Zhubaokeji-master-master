@@ -250,3 +250,11 @@ file=D:\AndroidTest\Zhubaokeji-master-master\app\build\outputs\mapping\release\m
 sha1=9ecea54b8536f9f0588f062c0a1d299e576c1a2c
 appId=e7b505a967
 
+file=D:\AndroidTest\Zhubaokeji-master-master\app\build\outputs\mapping\release\mapping.txt
+sha1=c518b5d2a2e715be9a47616822c19c0858cfaff3
+appId=e7b505a967
+
+file=D:\AndroidTest\Zhubaokeji-master-master\app\build\outputs\mapping\release\mapping.txt
+sha1=35328177afe3790a55dd33be91212776f0fd8aee
+appId=e7b505a967
+
